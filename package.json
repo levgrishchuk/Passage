@@ -1,0 +1,22 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "for testing purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonwane/node-testing.git"
+  },
+  "author": "moonwane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moonwane/node-testing/issues"
+  },
+  "homepage": "https://github.com/moonwane/node-testing#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
