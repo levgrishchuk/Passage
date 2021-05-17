@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const path = require('path')
+const path = require('path');
+var auth = require('./routes/auth');
 
 // routing for static files
 app.use('/', express.static(path.join(__dirname, '../public')));
@@ -23,7 +24,9 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 //     res.sendFile(path.join(__dirname, '../assets/styles.css'))
 // })
 
+var stateKey = 'spotify_auth_state';
 
+app.use('/login', require('./routes/login'));
 
 // connects to port
 app.listen(8888, () => {

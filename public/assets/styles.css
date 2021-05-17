@@ -1,12 +1,15 @@
-h1{
-    text-align: center;
+/* #login, #loggedin {
+    display:none;
+} */
+h1 {
+    /* text-align: center; */
     font-size: large;
     padding: 2px;
 }
-body{
+body {
     background-color: green;
 }
-p{
+p {
     text-align: center;
     font-size: medium;
 }
