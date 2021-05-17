@@ -1,0 +1,12 @@
+h1{
+    text-align: center;
+    font-size: large;
+    padding: 2px;
+}
+body{
+    background-color: green;
+}
+p{
+    text-align: center;
+    font-size: medium;
+}
