@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-var auth = require('./routes/auth');
+const cookieParser = require('cookie-parser');
 
 // routing for static files
-app.use('/', express.static(path.join(__dirname, '../public')));
+// why use cookieParser?
+app.use('/', express.static(path.join(__dirname, '../public'))).use(cookieParser());
 // app.use('/favicon.ico', path.join(__dirname, '../assets/favicon.ico'));
 
 
@@ -24,9 +25,14 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 //     res.sendFile(path.join(__dirname, '../assets/styles.css'))
 // })
 
-var stateKey = 'spotify_auth_state';
-
+// can I include controllers in static method up top?
+app.set('view engine', 'ejs')
 app.use('/login', require('./routes/login'));
+app.use('/refresh_token', require('./routes/refresh_token'));
+app.use('/callback', require('./routes/callback'));
+app.use('/controllers', express.static(path.join(__dirname, '../controllers')));
+
+app.use
 
 // connects to port
 app.listen(8888, () => {
