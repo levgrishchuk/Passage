@@ -2,6 +2,8 @@
 //     alert("amit")
 //  });
 
+rfce
+
 function getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,

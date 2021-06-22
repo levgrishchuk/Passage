@@ -1,3 +1,4 @@
+
 // // check if there is data in userstatus
 // (function pageUpdater(){    
 //     // if there is data, update image
