@@ -16,7 +16,7 @@ export default function useAuth(code) {
             // store response data in state variables
             set_access_token(res.data.access_token);
             set_refresh_token(res.data.refresh_token);
-            set_expires_in(61);
+            set_expires_in(res.data.expires_in);
             // clear code from url
             window.history.pushState({}, null, '/');
         })
@@ -38,7 +38,7 @@ export default function useAuth(code) {
             }).then(res => {
                 // store response data in state variables
                 set_access_token(res.data.access_token);            
-                set_expires_in(61);
+                set_expires_in(res.data.expires_in);
             })
         }, (expires_in - 60) * 1000);
 

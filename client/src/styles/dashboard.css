@@ -1,0 +1,23 @@
+.container {
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    height: 100vh;    
+}
+
+#top, #library, #player {    
+    border:1px solid red;
+}
+
+#top{
+    color:red;
+    /* margin-top: 20px; */
+    /* padding-top: 20px; */
+    
+}
+
+#library {
+    color:yellow;
+    overflow-y: auto;
+    flex-grow: 1;    
+}
