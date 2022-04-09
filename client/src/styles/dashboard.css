@@ -1,0 +1,52 @@
+#dashboard {
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    height: 100vh; 
+    position: relative; 
+    /* background: linear-gradient(to bottom, #423081, #121212 200px);   */
+    /* background: linear-gradient(to bottom, #423081, #121212fb 200px);   */
+    background: linear-gradient(to bottom, #423081, #121212c0 200px);  
+}
+
+#player {
+    margin-bottom: 2em;
+}
+
+#player {    
+    /* border:1px solid #b2b2b2;; */
+    /* background-color: #303030; */
+    background-color: transparent;
+}
+
+#top{
+    color:red;
+    /* margin-top: 20px; */
+    /* padding-top: 20px; */
+    background-color: transparent;
+    
+}
+
+#library {
+    /* background: #121212;     */
+    background: transparent;
+    overflow-y: auto;
+    flex-grow: 1;    
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    /* z-index: -1; */
+}
+
+#inputPanel{
+    background: transparent;
+}
+
+#dashboardVisualizer{
+    opacity: 5%;
+}

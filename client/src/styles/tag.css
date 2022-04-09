@@ -1,0 +1,64 @@
+.tagResponsive{    
+    background: transparent;  
+    display: flex;  
+    padding-left: 0.50rem;
+    padding-right: 0.90rem;
+    /* padding-top: 0.25rem;
+    padding-bottom: 0.25rem; */
+    border-radius: 0.75rem;     
+    min-height: fit-content;    
+    min-width:fit-content;
+    writing-mode: horizontal-tb;
+    overflow-x: auto;   
+    align-items: center; 
+    border-color: #acacac;
+    border-style: solid;
+    border-width: 1px;
+    
+    
+}
+
+.tagDisplay{    
+    background: transparent;  
+    display: flex;  
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    /* padding-top: 0.25rem; */
+    padding-bottom: 0.25rem;
+    border-radius: 0.75rem;     
+    min-height: fit-content;    
+    min-width:fit-content;
+    writing-mode: horizontal-tb;
+    overflow-x: auto;   
+    align-items: center; 
+    border-color: #acacac;
+    border-style: solid;
+    border-width: 1px;
+}
+
+
+.buttonCircle, .buttonX, .buttonTag, .content{
+    background-color: transparent;
+}
+
+.buttonTag{    
+    display: inline-block;   
+    margin-right: 0.25rem;
+    
+}
+
+.buttonX{
+    display:block;
+    /* position: relative;
+    --sizeCircle: 1.75rem;
+    --sizeX: calc(1.75rem - 0.25rem);
+    --horizontalOffset: calc(var(--sizeCircle) - (var(--sizeCircle) - var(--sizeX)) / 2); 
+    right: var(--horizontalOffset);
+    margin-right: calc(-1 * var(--horizontalOffset) + 0.75rem); */
+}
+
+.content{    
+    color:#acacac; 
+    
+}
+
