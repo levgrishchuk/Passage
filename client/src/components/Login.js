@@ -1,17 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import visualizer from "./Visualizer";
 import '../styles/login.css';
 import { authUrl } from './spotify';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
-function Login() {    
+function Login() {   
+    
+    useEffect(() => {
+        visualizer()
+      }, [])
+    
     return (
-        <Container>
+        <Container id="loginContainer">
+            <canvas class="webgl" id="loginVisualizer"></canvas>
             <div className='login'>
                 <img alt='Spotify logo' src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png'></img>
-                <a href={ authUrl }>Click here to Login</a>
+                <div id="projectName">PASSAGE</div> 
+                <Container id="loginButtonContainer" className="loginButtonContainerItems mt-5">
+                    <Row className="loginButtonContainerItems gx-5">
+                        <Col className="loginButtonContainerItems">
+                            <Row className="loginButtonContainerItems pt-3 pb-3">
+                                <Col className="loginButtonContainerItems">
+                                    <a id='loginClickLeft' href={ authUrl }>
+                                        <div className="loginButtonContainerItems d-flex justify-content-center">
+                                            <span className="loginButtonSpan2">CLICK HERE TO LOGIN WITH SPOTIFY</span>
+                                        </div>
+                                    </a>
+                                </Col>
+                            </Row>
+                            <Row className="loginButtonContainerItems pb-5">
+                                <Col className="loginButtonContainerItems">
+                                    <div className="loginButtonContainerItems d-flex justify-content-center">
+                                        <span className="loginButtonSpan">website features (play/pause/seek/save etc.) functional only if you have a <u className='loginUnderlines'>PREMIUM SPOTIFY ACCOUNT</u></span>
+                                    </div> 
+                                </Col>
+                            </Row>
+                            
+                        </Col>
+                        <Col className="loginButtonContainerItems">
+                            <Row className="loginButtonContainerItems pt-3 pb-3">
+                                <Col className="loginButtonContainerItems">
+                                    <a id='loginClickRight' href='/?code=preview'>
+                                        <div className="loginButtonContainerItems d-flex justify-content-center">
+                                            <span className="loginButtonSpan2">CLICK HERE TO VISIT A PREVIEW</span>
+                                        </div>
+                                    </a>
+                                </Col>
+                            </Row>
+                            <Row className="loginButtonContainerItems">
+                                <Col className="loginButtonContainerItems">
+                                    <div className="loginButtonContainerItems d-flex justify-content-center">
+                                        <span className="loginButtonSpan">this preview has track sections already saved to your library. This is for if you <u className='loginUnderlines'>do not have a PREMIUM SPOTIFY ACCOUNT</u></span>
+                                    </div> 
+                                </Col>
+                            </Row>
+                            
+                        </Col>
+                    </Row>
+                    
+                    
+                
+                </Container>               
+                
             </div>
         </Container>        
     )
+
+    
 }
 
 export default Login

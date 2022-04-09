@@ -1,0 +1,312 @@
+.genericTextContent {
+    font-size:medium;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #f9f9f9;
+}
+.indexRow{
+    color:#acacac;
+}
+
+.rowContent{
+    background: transparent;
+}
+
+.libraryRow{
+  background: transparent;
+}
+
+.row{
+  /* background:yellow; */
+}
+
+.hovered{
+  background: #2a2a2a;
+}
+
+.tooltip-inner{
+  max-width: 100rem;
+  text-align: left;
+}
+
+.hovered .secondaryText{
+  color: #f9f9f9;
+  /* color:yellow; */
+}
+
+.hovered .tagDisplay{
+  border-color: #f9f9f9;
+  /* border-color: red; */
+}
+
+.imageCol{
+  margin-left:-0.2rem;
+}
+
+.headerIndex{
+  margin-left:-0.2rem;
+  margin-right:0.2rem;
+}
+
+.headerRow{
+  /* border-bottom: 1px solid #acacac; */
+  padding-top:1.5rem;
+  padding-bottom: 0.5rem;
+  
+}
+
+.headerSeparator{
+  margin-bottom: 1.5rem;
+}
+
+.indexValue{
+  margin-right:0.2rem;
+}
+
+.trackButtons{
+    background: transparent;
+    fill: #f9f9f9;
+    /* margin-right: -0.25rem; */
+}
+
+.tagTray{
+    background:transparent;
+    overflow-x: auto;
+    /* margin-bottom: 1rem; */
+    /* padding-bottom: -3rem; */
+}
+
+.tagTrayLibrary{
+  background: transparent;
+  overflow-x: hidden;
+}
+
+.tagTrayLibraryContent .tagDisplay{
+  width:auto;
+  background: yellow;
+  overflow-x: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.tagTray::-webkit-scrollbar {
+    display: none;
+  }
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+.tagTray {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+.libraryContainer{  
+  background-color: transparent;
+}
+
+.titleColRight{
+  /* calculation used by col's to calculate gap size. Used by divs instead */
+  padding-left: calc(var(--bs-gutter-x) * .5);
+}
+
+.titleColLeft{
+  padding-right: calc(var(--bs-gutter-x) * .5);
+}
+
+.tagTray:hover{
+    scrollbar-width: thin;
+}
+
+.secondaryText{
+    color:#acacac;
+    font-size: 90%;
+}
+
+/* $maxBar: 1rem; */
+
+.equilizer {
+    width:1rem;
+    height:1rem;
+    transform: rotate(180deg);
+    background:transparent;
+    /* margin-right: -0.25rem; */
+    
+  }
+
+.bar{
+    --max-height:4.4px;
+    --my-animation-duration:0.75s;
+
+    fill:#1db954;
+    width:0.7px;
+    stroke:#154526;
+    stroke-width: 0.1px;
+    
+    
+
+}
+
+.bar1, .bar2, .bar3{
+    animation: equalize-1 var(--my-animation-duration) 0s infinite linear;
+}
+
+.bar4{
+    animation: equalize-2 var(--my-animation-duration) 0s infinite linear;
+}
+
+
+.bar:nth-child(1) { 
+    
+    animation-delay: 0s;
+  }
+  
+  .bar:nth-child(2) { 
+    animation-delay: calc(var(--my-animation-duration) * calc(-2/4));
+  }
+  
+  .bar:nth-child(3) { 
+    
+    animation-delay: calc(var(--my-animation-duration) * calc(-1/4));
+  }
+  
+  .bar:nth-child(4) { 
+    animation-delay: calc(var(--my-animation-duration) * calc(-3/4));
+  }
+  
+  @keyframes equalize-1 {
+    
+    0% {
+      height: calc(var(--max-height) * calc(35/224));
+    }
+    15% {
+        height: calc(var(--max-height) * calc(35/224));
+      }
+
+    33% {
+      height: calc(var(--max-height) * calc(134/224));
+    }
+    48% {
+        height: calc(var(--max-height) * calc(134/224));
+      }
+    66% {
+      height: calc(var(--max-height) * calc(224/224));
+    }
+    81% {
+        height: calc(var(--max-height) * calc(224/224));
+      }
+    100% {
+      height: calc(var(--max-height) * calc(25/224));
+    }
+    
+  }
+
+  @keyframes equalize-2 {
+    
+    0% {
+      height: calc(var(--max-height) * calc(35/224));
+    }
+    60% {
+      height: calc(var(--max-height) * calc(224/224));
+    }
+    75% {
+        height: calc(var(--max-height) * calc(224/224));
+      }
+    100% {
+      height: calc(var(--max-height) * calc(25/224));
+    }    
+  }
+
+  
+
+  /* mapped out by studying Spotify's animation frame by frame */
+  /* @keyframes equalize {
+    
+    0% {
+      height: calc(var(--max-height) * 1);
+    }
+    5% {
+      height: calc(var(--max-height) * calc(192/224));
+    }
+    15% {
+      height: calc(var(--max-height) * calc(169/224));
+    }
+    19% {
+      height: calc(var(--max-height) * calc(102/224));
+    }
+    23% {
+      height: calc(var(--max-height) * calc(64/224));
+    }
+    27% {
+      height: calc(var(--max-height) * calc(45/224));
+    }
+    43% {
+      height: calc(var(--max-height) * calc(64/224));
+    }
+    47% {
+      height: calc(var(--max-height) * calc(102/224));
+    }
+    59% {
+      height: calc(var(--max-height) * calc(165/224));
+    }
+    64% {
+      height: calc(var(--max-height) * calc(145/224));
+    }
+    69% {
+      height: calc(var(--max-height) * calc(160/224));
+    }
+    73% {
+      height: calc(var(--max-height) * calc(184/224));
+    }
+    77% {
+      height: calc(var(--max-height) * calc(190/224));
+    }
+    100% {
+      height: calc(var(--max-height) * 1);
+    }
+  } */
+
+  /* rough work, the intervals represent delays between frames */
+  /* @keyframes equalize {
+    
+    0% {
+      height: calc(var(--max-height) * 1);
+    }
+    5% {
+      height: calc(var(--max-height) * calc(192/224));
+    }
+    10% {
+      height: calc(var(--max-height) * calc(169/224));
+    }
+    4% {
+      height: calc(var(--max-height) * calc(102/224));
+    }
+    4% {
+      height: calc(var(--max-height) * calc(64/224));
+    }
+    4% {
+      height: calc(var(--max-height) * calc(45/224));
+    }
+    16% {
+      height: calc(var(--max-height) * calc(64/224));
+    }
+    4% {
+      height: calc(var(--max-height) * calc(102/224));
+    }
+    12% {
+      height: calc(var(--max-height) * calc(165/224));
+    }
+    5% {
+      height: calc(var(--max-height) * calc(145/224));
+    }
+    5% {
+      height: calc(var(--max-height) * calc(160/224));
+    }
+    4% {
+      height: calc(var(--max-height) * calc(184/224));
+    }
+    4% {
+      height: calc(var(--max-height) * calc(190/224));
+    }
+    100% {
+      height: calc(var(--max-height) * calc(210/224));
+    }
+  } */

@@ -15,3 +15,8 @@ code {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
+
+@font-face{
+    font-family: mainTitleFont;
+    src:url(../assets/lemon-milk-font/LemonMilkMedium-mLZYV.otf);
+}

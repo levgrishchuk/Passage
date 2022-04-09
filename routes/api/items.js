@@ -7,8 +7,8 @@ const Item = require('../../models/Item');
 // @route   GET api/items
 // @desc    Get items
 // @access  Public
-router.get('/', (req, res) => {
-    Item.find()
+router.get('/', (req, res) => {    
+    Item.find({user: req.query.user})
         .sort({date: -1})
         .then(items => res.json(items));
         
@@ -19,10 +19,12 @@ router.get('/', (req, res) => {
 // @access  Public
 router.post('/', (req, res) => {        
     const newItem = new Item({
-        name: req.body.name,
+        user: req.body.user,
         start: req.body.start,
         finish: req.body.finish,
-        notes: req.body.notes});  
+        trackUri: req.body.trackUri,        
+        notes: req.body.notes,
+        tags: req.body.tags});  
     newItem.save().then(newItem => res.json(newItem));   
 });
 

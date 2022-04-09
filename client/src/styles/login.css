@@ -2,30 +2,121 @@
     background-color: black;
 }
 
-.login {
-    display: grid;
-    place-items: center;
-    height: 100vh;   
-    background-color: black;
+#loginVisualizer
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    /* z-index: 0; */
+    /* background-color: transparent; */
+    opacity: 5%;
 }
 
+.login {
+    display: flex;
+    align-items:center;
+    position:relative;
+    /* place-items: center; */
+    height: 100vh;   
+    background-color: transparent;
+    flex-direction: column;
+    /* z-index: 5; */
+    /* flex-shrink: 5; */
+}
+
+
+
 .login > img {     
-    width: 100%;
+    width: 20%;
     height: auto;
+    margin-top: 5vh;
+    /* margin-left:80vw; */
     alt: unset;
+    background-color: transparent;
     
+}
+
+
+
+#projectName{
+    /* display:flex; */
+    font-family: mainTitleFont;
+    font-size: 15vw;
+    color:#1ab26b;
+    background-color: transparent;
+}
+
+#loginButtonContainer{
+    width:100%;
+}
+
+.loginButtonContainerItems{
+    /* flex-wrap: wrap; */
+    background-color: transparent;
+    /* gap: 5; */
+}
+
+.loginButtonSpan{
+    /* display:block; */
+    background-color: transparent;
+    font-style: italic;
+    font-size: 14px;
+    font-weight:1000;
+    text-align:center;
+    /* max-height: 15vh; */
+    text-transform: uppercase;
+    padding-left:64px;
+    padding-right:64px;
+    
+
+}
+
+#textBlockLeft, #textBlockRight{
+    background-color: transparent;
+}
+
+#textBlockLeft{
+    /* margin-right: 2vw; */
+    display:flex;
+}
+
+
+#textBlockRight{
+    /* margin-left: 2vw; */
+    display:flex;
 }
 
 /* TODO: enlarge and add white border on hover */
-.login > a {
+.loginButtonSpan2 {    
     font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
-    background-color: #1db954;
-    border-radius: 99px;  
-    text-decoration: none;  
-    font-weight: 1000;
+    /* width: 100%; */
+    font-size: 14px;
+    /* max-width: 40%; */
+    padding: 14px 32px;
+    /* background-color: #1db954; */
+    background-color: #1ab26b;
+    border-radius: 50px;  
+    font-weight:1000;
     text-transform: uppercase;   
     color: black;
     text-align:center;
+    width:fit-content;
+    /* max-height: 5rem; */
     
+}
+
+#loginClickLeft, #loginClickRight{
+    text-decoration: none;
+}
+
+
+
+.colItems{
+    align-content: center;
+}
+
+.loginUnderlines{
+    background-color:transparent;
+    color:#1ab26b;
 }

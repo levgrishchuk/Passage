@@ -7,14 +7,18 @@ import SpotifyWebApi from "spotify-web-api-node";
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import InputPanel from "./InputPanel";
-import Library from "./Library";
+import Library from "../components/Preview";
 
 const spotifyApi = new SpotifyWebApi({
     clientId: "a51237d57ccc4dbf9f1162c378934b9c"
   })
 
-function Dashboard({ code }) {
-  const accessToken = useAuth(code);  
+function Preview({ code }) {
+
+  // clear code from url
+  window.history.pushState({}, null, '/');
+
+  // const accessToken = useAuth(code);  
   const defaultTimeDuration = 10000;
   var timeout;
   var sliderTimeOutFlag = false;
@@ -23,11 +27,8 @@ function Dashboard({ code }) {
   var timeDuration = useRef();
   var dataUpdateTimer = useRef();
   var dataUpdateRetryTimer = useRef();
-  var trackLoopTimer = useRef();
   var testCount = useRef(0);
   var user = useRef();
-  
-  
 
   // state variables for InputPanel
   var [customTag, set_custom_tag] = useState("");
@@ -40,12 +41,10 @@ function Dashboard({ code }) {
   var [libraryState, set_library_state] = useState({hoveredRow: -1});
   var [activeRow, set_active_row] = useState(-1);
   
-  const [data, set_data] = useState();
+  const [data, set_data] = useState({data:{body:{is_playing:true}}});
   // const [sliderHandles, set_slider_handles] = useState([Math.round(defaultTimeDuration * 1/5), Math.round(defaultTimeDuration * 2/5)]);
   const [trackUri, set_track_uri] = useState();
   // const [prevHandle, set_prev_handle] = useState(0); 
-  const [loopTrack, set_loop_track] = useState(true);
-  var trackLoopRef = useRef(loopTrack);
   
 
   useEffect(() => {
@@ -55,11 +54,10 @@ function Dashboard({ code }) {
 
   let dashboard =
   <div>
-    <canvas id="dashboardVisualizer" class="webgl"></canvas>  
+    <canvas class="webgl"></canvas>  
     <Container id='dashboard'>
           <div id='top' className='py-2'>
           {libraryState.hoveredRow}
-          <a href="/"> click me</a>
           </div>            
           <div id='library' className='my-2'><Library 
           library={library}
@@ -88,63 +86,62 @@ function Dashboard({ code }) {
           handleTagDelete={handleTagDelete} /></div>
           <div id='player'><Player trackDuration={timeDuration.current !== undefined ? timeDuration.current : defaultTimeDuration} 
           handleTogglePlayback={handleTogglePlayback}     
-          isPlaying={data ? data.body.is_playing : null}               
+          isPlaying={data ? data.body.is_playing : null}     
           handleSliderChange={handleSliderChange}
           handleSave={handleSave}          
-          sliderHandles={previousValues.current}
-          handleLoopTrack={handleLoopTrack}
-          loopTrack={loopTrack} /></div>            
+          sliderHandles={previousValues.current} /></div>            
     </Container>
   </div>
 
-  // update access token
+  /* // update access token
   useEffect(() => {
       if (!accessToken) return
       spotifyApi.setAccessToken(accessToken)
-    }, [accessToken])
+    }, [accessToken]) */
 
-  function fetchLibrary(data, username){
-    console.log(username)
-    axios.get('/api/items', {
-      params:{
-        user: username
-        }
-      }).then(res => {
-        console.log('library: \n');
-        console.log(res.data);
-        
-        // make array of track id's
-        var arrayOfTrackIds = res.data.map(record => {
-          return record.trackUri.replace("spotify:track:", "");
-        });
-        // console.log(arrayOfTrackIds);
-
-        // query all track id's for info
-        spotifyApi.getTracks(arrayOfTrackIds).then(tracksRes => {
-          // to avoid an index out of bounds error
-          if(res.data.length != tracksRes.body.tracks.length) return alert('error with fetching library, please try again');
-          // create new property containing track info
-          res.data.map((record, index) => {
-            record.trackInfo = tracksRes.body.tracks[index];
-                 
-          })
-          // store result
-          // var tempArray = library
-          // tempArray.push()
-          set_library(res.data)
+  /* // update user data
+  useEffect(() => {
+    if (!accessToken) return
+    if (!spotifyApi) return
+    spotifyApi.getMe().then(data => {
+      user.current = data.body.display_name;
+      axios.get('/api/items', {
+        user: data.body.display_name
+        }).then(res => {
+          // console.log('library: \n');
           // console.log(res.data);
-          // for debugging
-          spotifyApi.getMyCurrentPlaybackState().then(data => {
-              console.log(data);
-              if(data.body !== null){
-                set_data(data);        
-              }              
-            })
-          // clearDataTimers();
-          // updateCurrentUserState();
-          })
           
-          .catch(() => {            
+          // make array of track id's
+          var arrayOfTrackIds = res.data.map(record => {
+            return record.trackUri.replace("spotify:track:", "");
+          });
+          // console.log(arrayOfTrackIds);
+
+          // query all track id's for info
+          spotifyApi.getTracks(arrayOfTrackIds).then(tracksRes => {
+            // to avoid an index out of bounds error
+            if(res.data.length != tracksRes.body.tracks.length) return alert('error with fetching library, please try again');
+            // create new property containing track info
+            res.data.map((record, index) => {
+              record.trackInfo = tracksRes.body.tracks[index];
+                   
+            })
+            // store result
+            set_library(res.data);
+            // console.log(res.data);
+            // for debugging
+            spotifyApi.getMyCurrentPlaybackState().then(data => {
+                console.log(data);
+                if(data.body !== null){
+                  set_data(data);        
+                }              
+              })
+            // clearDataTimers();
+            // updateCurrentUserState();
+            })      
+                     
+        })
+        .catch(() => {            
             alert("error with retrieving library");
             // for debugging
             spotifyApi.getMyCurrentPlaybackState().then(data => {
@@ -153,44 +150,21 @@ function Dashboard({ code }) {
                 set_data(data);        
               }              
             }) 
-          })
-                   
-      })
-      
-      .catch(() => {            
-          alert("error with retrieving library");
-          // for debugging
-          spotifyApi.getMyCurrentPlaybackState().then(data => {
-            console.log(data);
-            if(data.body !== null){
-              set_data(data);        
-            }              
-          }) 
-      })
-  }
-
-  // update user data
-  useEffect(() => {
-    if (!accessToken) return
-    if (!spotifyApi) return
-    spotifyApi.getMe().then(data => {
-      user.current = data.body.display_name;
-      fetchLibrary(data, ["50b3753a7ed653a553c26c8585fc5818(preview)", data.body.display_name])
-      // fetchLibrary(data, data.body.display_name)      
+        })
     })
     // const fetchInterval = setInterval(() => {
     //   spotifyApi.getMyCurrentPlaybackState().then(data => {
     //     console.log(data);
     //     set_data(data);
     //   })
-    // }, 10000);
+    // }, 10000); */
 
     
 
-    return () => clearDataTimers();
-  }, [accessToken])
+    /* return () => clearDataTimers();
+  }, [accessToken]) */
 
-  useEffect(() => {    
+  /* useEffect(() => {    
     console.log("data updated!");
     if(data !== undefined && data.body != null) {
 
@@ -214,7 +188,7 @@ function Dashboard({ code }) {
       } 
     }
 
-  }, [data]) 
+  }, [data])  */
   
   // function updateLibraryActiveRows(data){
   //   // guard against accessing properties on null
@@ -241,10 +215,9 @@ function Dashboard({ code }) {
   //   }
   // }
 
-  useEffect(() => { 
-    console.log("library:")   
-    console.log(library)    
-  }, [library]) 
+  useEffect(() => {    
+    console.log(libraryState);    
+  }, [libraryState]) 
   
   // useEffect(() => {   
   //   var index = libraryState.hoveredRow; 
@@ -316,33 +289,8 @@ function Dashboard({ code }) {
     clearTimeout(dataUpdateRetryTimer.current);
   }
 
-  // toggle the loopTrack value
-  function handleLoopTrack(){
-    if(loopTrack == true){
-      set_loop_track(false)
-      trackLoopRef.current = false
-    }
-    else{
-      set_loop_track(true)
-      trackLoopRef.current = true
-    }
-  }
-
-  function startTrackSegmentLoop(e, index, action, duration) {
-    trackLoopTimer.current = setTimeout(() => {
-      if(trackLoopRef.current == true){
-        handleTrackClick(e, index, action);
-      }
-      else{
-        clearTimeout(trackLoopTimer.current)
-      }
-      
-    }, duration)       
-       
-  }
-
-  function updateCurrentUserState(delay=0, index=-1){   
-    return; 
+  /* function updateCurrentUserState(delay=0, index=-1){    
+    return
     var tries = 0;
     function retryFetchUntilUpdate(){      
       if(delay > 0 && tries == 0){
@@ -385,7 +333,7 @@ function Dashboard({ code }) {
           if(res.body){
             // if two or more spotify requests are made too close to each other
             if(res.body.item){
-              set_data(res);              
+              set_data(res);
               if(index != -1) set_active_row(index);  
               console.log("main2");            
               dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
@@ -406,10 +354,11 @@ function Dashboard({ code }) {
           }
              
         }, error => console.log(error))
-      }      
+      }
+      
     }
-    retryFetchUntilUpdate();     
-  }
+    retryFetchUntilUpdate(); 
+  } */
   
   function handleTrackClick(e, index, action){
     var elementClassList = document.getElementById(`index-${index}`).classList;
@@ -443,15 +392,9 @@ function Dashboard({ code }) {
           position: library[index].trackInfo.track_number - 1
         },
         position_ms: library[index].start
-      }).then(() => {      
-        timeDuration.current = library[index].trackInfo.duration_ms;
-        previousValues.current = [library[index].start, library[index].finish];  
-
-        clearTimeout(trackLoopTimer.current);        
-        startTrackSegmentLoop(e, index, action, library[index].finish - library[index].start);
-
-        clearDataTimers();        
-        updateCurrentUserState(500, index);              
+      }).then(() => {         
+        clearDataTimers();
+        updateCurrentUserState(500, index);        
       },        
       error => alert("No active device found"))
       }
@@ -490,7 +433,7 @@ function Dashboard({ code }) {
       console.log(curr_array);
       set_tags_tray(curr_array);   
     }
-    else{
+    else {
       alert("tag already exists");
     }
   } 
@@ -661,7 +604,6 @@ function Dashboard({ code }) {
         var tempData = data;
         if(data.body.is_playing){
           spotifyApi.pause().then((res) => {
-            clearTimeout(trackLoopTimer.current);
             console.log("Paused");
             tempData.body.is_playing = !tempData.body.is_playing;
             set_data(tempData);  
@@ -693,4 +635,4 @@ function Dashboard({ code }) {
     dashboard
   )
 }
-export default Dashboard;
+export default Preview;

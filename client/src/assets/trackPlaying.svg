@@ -1,0 +1,9 @@
+<svg x="0px" y="0px"  class="trackButtons equilizer" viewBox="0 0 4 4.5">
+  <g>
+    <!-- <title>Audio Equilizer</title> -->
+    <rect class="bar bar1" transform="translate(0,0)" y="0"></rect>
+    <rect class="bar bar2" transform="translate(1 0)" y="0"></rect>
+    <rect class="bar bar3" transform="translate(2 0)" y="0"></rect>
+    <rect class="bar bar4" transform="translate(3 0)" y="0"></rect>    
+  </g>
+</svg>

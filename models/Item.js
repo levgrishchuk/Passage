@@ -1,10 +1,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// // image Schema
+// const ImageSchema = new Schema({
+//     height: {
+//         type: Number,
+//         required: true
+//     },
+//     url: {
+//         type: String,
+//         required: true
+//     },
+//     width: {
+//         type: Number,
+//         required: true
+//     }
+// });
+
 // create Schema 
 // TODO: hash usernames?
 const ItemSchema = new Schema({
-    name: {
+    user: {
         type: String,
         required: true
     },
@@ -20,8 +36,15 @@ const ItemSchema = new Schema({
         type: Number,
         required: true
     },
+    trackUri: {
+        type: String,
+        required: true 
+    },    
     notes: {
         type: String
+    },
+    tags: {
+        type: []
     }
 });
 

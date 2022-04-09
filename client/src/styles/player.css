@@ -1,0 +1,62 @@
+/* #player {
+    border: none;
+} */
+
+#controlsRow {
+    margin-bottom: 2em;
+}
+
+button {
+    color:white;
+}
+
+.playerButtons {
+    /* margin-right: 2em; */
+    margin-left:1rem;
+    margin-right:1rem;
+    background:transparent;
+    fill:white;
+}
+
+#playerPlay{
+    /* margin:0.5rem; */
+}
+
+.playerSideButtons{
+    /* background:#b2b2b2; */
+    background:transparent;
+    color: #b2b2b2;
+    fill: #b2b2b2;
+    /* font-weight: 600; */
+}
+
+.trackLooped{
+    border-width: 3px;
+    border-color: white;
+    /* background:#b2b2b2; */
+    color: white;
+    font-weight:bold;
+}
+
+#playerNextTrackButtonLeft{
+    transform:rotate(180deg);
+}
+/* 
+#playerStop, #playerPlay{
+    display:flex;
+    align-self: center;
+} */
+
+#save {
+    /* margin-left: 2em; */
+}
+
+.playerItems{
+    /* background-color: #181818; */
+    /* background-color: #303030; */
+    background-color: transparent;
+}
+
+.rc-slider-tooltip, .rc-slider-tooltip-arrow{
+    background: transparent;
+}

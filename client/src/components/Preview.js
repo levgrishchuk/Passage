@@ -1,4 +1,4 @@
-import useAuth from "./useAuth";
+import useAuthClientCredientials from "./useAuthClientCredientials";
 import visualizer from "./Visualizer";
 import { Container, Row } from 'react-bootstrap';
 import '../styles/dashboard.css'
@@ -13,9 +13,9 @@ const spotifyApi = new SpotifyWebApi({
     clientId: "a51237d57ccc4dbf9f1162c378934b9c"
   })
 
-function Dashboard({ code }) {
-  const accessToken = useAuth(code);  
+function Preview() {
   const defaultTimeDuration = 10000;
+  const accessToken = useAuthClientCredientials();
   var timeout;
   var sliderTimeOutFlag = false;
   var previousValues = useRef([Math.round(defaultTimeDuration * 1/5), Math.round(defaultTimeDuration * 2/5)]);
@@ -26,8 +26,6 @@ function Dashboard({ code }) {
   var trackLoopTimer = useRef();
   var testCount = useRef(0);
   var user = useRef();
-  
-  
 
   // state variables for InputPanel
   var [customTag, set_custom_tag] = useState("");
@@ -40,16 +38,15 @@ function Dashboard({ code }) {
   var [libraryState, set_library_state] = useState({hoveredRow: -1});
   var [activeRow, set_active_row] = useState(-1);
   
-  const [data, set_data] = useState();
+  const [data, set_data] = useState({body:{is_playing:false, item:{uri:"spotify:track:5qjJbjKzqYBhUL3Fk34yPl"}}});
   // const [sliderHandles, set_slider_handles] = useState([Math.round(defaultTimeDuration * 1/5), Math.round(defaultTimeDuration * 2/5)]);
   const [trackUri, set_track_uri] = useState();
   // const [prevHandle, set_prev_handle] = useState(0); 
   const [loopTrack, set_loop_track] = useState(true);
   var trackLoopRef = useRef(loopTrack);
-  
 
   useEffect(() => {
-    visualizer()
+    visualizer()    
   }, [])
 
 
@@ -95,15 +92,10 @@ function Dashboard({ code }) {
           handleLoopTrack={handleLoopTrack}
           loopTrack={loopTrack} /></div>            
     </Container>
-  </div>
+  </div> 
 
-  // update access token
-  useEffect(() => {
-      if (!accessToken) return
-      spotifyApi.setAccessToken(accessToken)
-    }, [accessToken])
-
-  function fetchLibrary(data, username){
+  function fetchLibrary(username){
+    console.log("hello")
     console.log(username)
     axios.get('/api/items', {
       params:{
@@ -133,88 +125,102 @@ function Dashboard({ code }) {
           // tempArray.push()
           set_library(res.data)
           // console.log(res.data);
-          // for debugging
-          spotifyApi.getMyCurrentPlaybackState().then(data => {
-              console.log(data);
-              if(data.body !== null){
-                set_data(data);        
-              }              
-            })
+          // // for debugging
+          // spotifyApi.getMyCurrentPlaybackState().then(data => {
+          //     console.log(data);
+          //     if(data.body !== null){
+          //       set_data(data);        
+          //     }              
+          //   })
           // clearDataTimers();
           // updateCurrentUserState();
           })
           
           .catch(() => {            
             alert("error with retrieving library");
-            // for debugging
-            spotifyApi.getMyCurrentPlaybackState().then(data => {
-              console.log(data);
-              if(data.body !== null){
-                set_data(data);        
-              }              
-            }) 
+            // // for debugging
+            // spotifyApi.getMyCurrentPlaybackState().then(data => {
+            //   console.log(data);
+            //   if(data.body !== null){
+            //     set_data(data);        
+            //   }              
+            // }) 
           })
                    
       })
       
-      .catch(() => {            
+      .catch((err) => {            
           alert("error with retrieving library");
-          // for debugging
-          spotifyApi.getMyCurrentPlaybackState().then(data => {
-            console.log(data);
-            if(data.body !== null){
-              set_data(data);        
-            }              
-          }) 
+          // // for debugging
+          // spotifyApi.getMyCurrentPlaybackState().then(data => {
+          //   console.log(data);
+          //   if(data.body !== null){
+          //     set_data(data);        
+          //   }              
+          // }) 
       })
   }
 
-  // update user data
+  // update access token
   useEffect(() => {
+    console.log(accessToken)
     if (!accessToken) return
-    if (!spotifyApi) return
-    spotifyApi.getMe().then(data => {
-      user.current = data.body.display_name;
-      fetchLibrary(data, ["50b3753a7ed653a553c26c8585fc5818(preview)", data.body.display_name])
-      // fetchLibrary(data, data.body.display_name)      
-    })
-    // const fetchInterval = setInterval(() => {
-    //   spotifyApi.getMyCurrentPlaybackState().then(data => {
-    //     console.log(data);
-    //     set_data(data);
-    //   })
-    // }, 10000);
+    spotifyApi.setAccessToken(accessToken)
+    // to give enough time for spotifyApi to setAccessToken
+    // *this is a bad solution, couldn't figure out a way to make a callback function, and this is just the preview afterall, most of the code here
+    // is dashboard code with low quality adjustments to make it work without the user signing in*
+    setTimeout(()=> fetchLibrary("50b3753a7ed653a553c26c8585fc5818(preview)"), 1000)
+    
+  }, [accessToken])
+
+  
+
+  // // update user data
+  // useEffect(() => {
+  //   if (!accessToken) return
+  //   if (!spotifyApi) return
+  //   spotifyApi.getMe().then(data => {
+  //     user.current = data.body.display_name;
+      
+  //     // fetchLibrary(data, data.body.display_name)      
+  //   })
+  //   // const fetchInterval = setInterval(() => {
+  //   //   spotifyApi.getMyCurrentPlaybackState().then(data => {
+  //   //     console.log(data);
+  //   //     set_data(data);
+  //   //   })
+  //   // }, 10000);
 
     
 
-    return () => clearDataTimers();
-  }, [accessToken])
+  //   return () => clearDataTimers();
+  // }, [accessToken])
 
-  useEffect(() => {    
-    console.log("data updated!");
-    if(data !== undefined && data.body != null) {
+  // useEffect(() => {    
+  //   console.log("data updated!");
+  //   if(data !== undefined && data.body != null) {
 
       
 
 
-      // if no previous tracks, update handles to be in spots 1/5 and 2/5
-      if(trackUri === undefined){
-        previousValues.current = [Math.round(data.body.item.duration_ms * 1/5), Math.round(data.body.item.duration_ms * 2/5)];
-        timeDuration.current = data.body.item.duration_ms;
-        set_track_uri(data.body.item.uri);
-      }
+  //     // if no previous tracks, update handles to be in spots 1/5 and 2/5
+  //     if(trackUri === undefined){
+  //       previousValues.current = [Math.round(data.body.item.duration_ms * 1/5), Math.round(data.body.item.duration_ms * 2/5)];
+  //       timeDuration.current = data.body.item.duration_ms;
+  //       set_track_uri(data.body.item.uri);
+  //     }
       
-      // if there was a previous track, update handles to same relative position
-      // condition checks that there are values in prevValues and timeDuration
-      else if(trackUri !== data.body.item.uri && previousValues.current && timeDuration){
-        previousValues.current = [Math.round(data.body.item.duration_ms * (previousValues.current[0] / timeDuration.current)),
-         Math.round(data.body.item.duration_ms * (previousValues.current[1] / timeDuration.current))];
-        timeDuration.current = data.body.item.duration_ms;
-        set_track_uri(data.body.item.uri); 
-      } 
-    }
+  //     // if there was a previous track, update handles to same relative position
+  //     // condition checks that there are values in prevValues and timeDuration
+  //     else if(trackUri !== data.body.item.uri && previousValues.current && timeDuration){
+  //       previousValues.current = [Math.round(data.body.item.duration_ms * (previousValues.current[0] / timeDuration.current)),
+  //        Math.round(data.body.item.duration_ms * (previousValues.current[1] / timeDuration.current))];
+  //       timeDuration.current = data.body.item.duration_ms;
+  //       set_track_uri(data.body.item.uri); 
+  //     } 
+  //   }
 
-  }, [data]) 
+  // }, [data]) 
   
   // function updateLibraryActiveRows(data){
   //   // guard against accessing properties on null
@@ -328,139 +334,158 @@ function Dashboard({ code }) {
     }
   }
 
-  function startTrackSegmentLoop(e, index, action, duration) {
-    trackLoopTimer.current = setTimeout(() => {
-      if(trackLoopRef.current == true){
-        handleTrackClick(e, index, action);
-      }
-      else{
-        clearTimeout(trackLoopTimer.current)
-      }
+  // function startTrackSegmentLoop(e, index, action, duration) {
+  //   trackLoopTimer.current = setTimeout(() => {
+  //     if(trackLoopRef.current == true){
+  //       handleTrackClick(e, index, action);
+  //     }
+  //     else{
+  //       clearTimeout(trackLoopTimer.current)
+  //     }
       
-    }, duration)       
+  //   }, duration)       
        
-  }
+  // }
 
   function updateCurrentUserState(delay=0, index=-1){   
     return; 
-    var tries = 0;
-    function retryFetchUntilUpdate(){      
-      if(delay > 0 && tries == 0){
-        setTimeout(() => {
-          spotifyApi.getMyCurrentPlaybackState().then(res => {            
-            console.log(`pipeline data: `);
-            console.log(res);
-            if(res.body){
-              // if two or more spotify requests are made too close to each other
-              if(res.body.item){                
-                set_data(res);
-                if(index != -1) set_active_row(index); 
-                console.log("main1");              
-                dataUpdateTimer.current = setTimeout(updateCurrentUserState, 4000);
-              }
-              else{
-                if(tries < 5){
-                  console.log("retry1");
-                  dataUpdateRetryTimer.current = setTimeout(retryFetchUntilUpdate, 250);
-                }
-                else{
-                  dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
-                }
+    // var tries = 0;
+    // function retryFetchUntilUpdate(){      
+    //   if(delay > 0 && tries == 0){
+    //     setTimeout(() => {
+    //       spotifyApi.getMyCurrentPlaybackState().then(res => {            
+    //         console.log(`pipeline data: `);
+    //         console.log(res);
+    //         if(res.body){
+    //           // if two or more spotify requests are made too close to each other
+    //           if(res.body.item){                
+    //             set_data(res);
+    //             if(index != -1) set_active_row(index); 
+    //             console.log("main1");              
+    //             dataUpdateTimer.current = setTimeout(updateCurrentUserState, 4000);
+    //           }
+    //           else{
+    //             if(tries < 5){
+    //               console.log("retry1");
+    //               dataUpdateRetryTimer.current = setTimeout(retryFetchUntilUpdate, 250);
+    //             }
+    //             else{
+    //               dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
+    //             }
                 
-              }
-            }
-            else{
-              dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
-            }
+    //           }
+    //         }
+    //         else{
+    //           dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
+    //         }
 
-            tries++;
+    //         tries++;
                
-          }, error => console.log(error))
-        }, delay)
-      }
-      else{
-        spotifyApi.getMyCurrentPlaybackState().then(res => {          
-          console.log(`pipeline data: `);
-          console.log(res);
-          if(res.body){
-            // if two or more spotify requests are made too close to each other
-            if(res.body.item){
-              set_data(res);              
-              if(index != -1) set_active_row(index);  
-              console.log("main2");            
-              dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
-            }
-            else{
-              if(tries < 5){
-                console.log("retry2");
-                dataUpdateRetryTimer.current = setTimeout(retryFetchUntilUpdate, 250);
-              }
-              else{
-                dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
-              }
+    //       }, error => console.log(error))
+    //     }, delay)
+    //   }
+    //   else{
+    //     spotifyApi.getMyCurrentPlaybackState().then(res => {          
+    //       console.log(`pipeline data: `);
+    //       console.log(res);
+    //       if(res.body){
+    //         // if two or more spotify requests are made too close to each other
+    //         if(res.body.item){
+    //           set_data(res);              
+    //           if(index != -1) set_active_row(index);  
+    //           console.log("main2");            
+    //           dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
+    //         }
+    //         else{
+    //           if(tries < 5){
+    //             console.log("retry2");
+    //             dataUpdateRetryTimer.current = setTimeout(retryFetchUntilUpdate, 250);
+    //           }
+    //           else{
+    //             dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
+    //           }
               
-            }
-          }
-          else{
-            dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
-          }
+    //         }
+    //       }
+    //       else{
+    //         dataUpdateTimer.current = setTimeout(updateCurrentUserState, 10000);
+    //       }
              
-        }, error => console.log(error))
-      }      
-    }
-    retryFetchUntilUpdate();     
+    //     }, error => console.log(error))
+    //   }      
+    // }
+    // retryFetchUntilUpdate();     
   }
   
   function handleTrackClick(e, index, action){
     var elementClassList = document.getElementById(`index-${index}`).classList;
     console.log("track clicked");
 
-    
     if(action === "play"){
-      // console.log(library[index].trackInfo.album.uri)
-      // console.log(library[index].trackInfo.track_number)
-
-    //   spotifyApi.getMyCurrentPlaybackState().then(datat => {
-    //     console.log("track click data: ");
-    //     console.log(datat);
-    //     console.log(data);
-    //     if(datat && datat.body.item != null) set_data(datat);
-        
-    //     spotifyApi.play({
-    //       context_uri: library[index].trackInfo.album.uri,
-    //       offset: {
-    //         position: library[index].trackInfo.track_number - 1
-    //       },
-    //       position_ms: library[index].start
-    //     }).then(res => res, error => alert("No active device found"));
-    //   }
-    // )
-    // updateCurrentUserState()
-
-      spotifyApi.play({
-        context_uri: library[index].trackInfo.album.uri,
-        offset: {
-          position: library[index].trackInfo.track_number - 1
-        },
-        position_ms: library[index].start
-      }).then(() => {      
-        timeDuration.current = library[index].trackInfo.duration_ms;
-        previousValues.current = [library[index].start, library[index].finish];  
-
-        clearTimeout(trackLoopTimer.current);        
-        startTrackSegmentLoop(e, index, action, library[index].finish - library[index].start);
-
-        clearDataTimers();        
-        updateCurrentUserState(500, index);              
-      },        
-      error => alert("No active device found"))
-      }
-    else if(action === "pause"){
-      set_active_row(-1);  
-      handleTogglePlayback(e);
-      clearDataTimers();
-      updateCurrentUserState(500);
+      var temp = {...data}
+      temp.body.is_playing = true
+      temp.body.item.uri = library[index].trackInfo.uri
+      timeDuration.current = library[index].trackInfo.duration_ms;
+      previousValues.current = [library[index].start, library[index].finish];
+      if(index != -1) set_active_row(index);
+      // needed for timeDuration and previousValues to update before state update
+      // *this is a bad solution, should have used useState for the above two variables from the start instead*
+      setTimeout(() => set_data(temp), 1000)  
+      
     }
+    else if(action === "pause"){
+      set_active_row(-1)
+      var temp = {...data}
+      temp.body.is_playing = false   
+      if(index != -1) set_active_row(index);   
+      setTimeout(() => set_data(temp), 1000)  
+    }
+    
+    // if(action === "play"){
+    //   // console.log(library[index].trackInfo.album.uri)
+    //   // console.log(library[index].trackInfo.track_number)
+
+    // //   spotifyApi.getMyCurrentPlaybackState().then(datat => {
+    // //     console.log("track click data: ");
+    // //     console.log(datat);
+    // //     console.log(data);
+    // //     if(datat && datat.body.item != null) set_data(datat);
+        
+    // //     spotifyApi.play({
+    // //       context_uri: library[index].trackInfo.album.uri,
+    // //       offset: {
+    // //         position: library[index].trackInfo.track_number - 1
+    // //       },
+    // //       position_ms: library[index].start
+    // //     }).then(res => res, error => alert("No active device found"));
+    // //   }
+    // // )
+    // // updateCurrentUserState()
+
+    //   spotifyApi.play({
+    //     context_uri: library[index].trackInfo.album.uri,
+    //     offset: {
+    //       position: library[index].trackInfo.track_number - 1
+    //     },
+    //     position_ms: library[index].start
+    //   }).then(() => {      
+        // timeDuration.current = library[index].trackInfo.duration_ms;
+        // previousValues.current = [library[index].start, library[index].finish];  
+
+    //     clearTimeout(trackLoopTimer.current);        
+    //     startTrackSegmentLoop(e, index, action, library[index].finish - library[index].start);
+
+    //     clearDataTimers();        
+    //     updateCurrentUserState(500, index);              
+    //   },        
+    //   error => alert("No active device found"))
+    //   }
+    // else if(action === "pause"){
+    //   set_active_row(-1);  
+    //   handleTogglePlayback(e);
+    //   clearDataTimers();
+    //   updateCurrentUserState(500);
+    // }
     
   }  
 
@@ -527,9 +552,9 @@ function Dashboard({ code }) {
         result[0] = values[0];
         previousValues.current = result;
       }      
-       // move place in song via api
-       spotifyApi.seek(values[0]).then(error => {},
-        e => {console.log("No active device found");});
+      //  // move place in song via api
+      //  spotifyApi.seek(values[0]).then(error => {},
+      //   e => {console.log("No active device found");});
       // return dashboard;   
     }
     else if(prevHandle.current === 2){
@@ -540,8 +565,8 @@ function Dashboard({ code }) {
         previousValues.current = result;
       }     
       // move place in song via api
-      spotifyApi.seek(values[1]).then(() => {},
-       e => {console.log("No active device found");});   
+      // spotifyApi.seek(values[1]).then(() => {},
+      //  e => {console.log("No active device found");});   
     } 
     // set_prev_handle(localPrevHandle);   
     console.log("seeked");
@@ -559,26 +584,26 @@ function Dashboard({ code }) {
   }
 
   function handleSave(e){
-    let values = previousValues.current;
-    if(data !== undefined && data.body !== null && user.current && previousValues.current && trackUri){
-      axios.post('/api/items', {
-        user: user.current,
-        start: previousValues.current[0],
-        finish: previousValues.current[1],
-        trackUri: trackUri,        
-        notes: notes,
-        tags: tagsTray
-        }).then(res => {
-          console.log(res);
-          clearDashboard();          
-        })
-        .catch(() => {            
-            alert("error with saving (server error)");
-        })
-    }
-    else{
-      alert("error with saving (client error)");
-    }
+    // let values = previousValues.current;
+    // if(data !== undefined && data.body !== null && user.current && previousValues.current && trackUri){
+    //   axios.post('/api/items', {
+    //     user: user.current,
+    //     start: previousValues.current[0],
+    //     finish: previousValues.current[1],
+    //     trackUri: trackUri,        
+    //     notes: notes,
+    //     tags: tagsTray
+    //     }).then(res => {
+    //       console.log(res);
+    //       clearDashboard();          
+    //     })
+    //     .catch(() => {            
+    //         alert("error with saving (server error)");
+    //     })
+    // }
+    // else{
+    //   alert("error with saving (client error)");
+    // }
   }
 
   function handleTagDelete(e, value){
@@ -655,36 +680,55 @@ function Dashboard({ code }) {
   // // }
   
   function handleTogglePlayback(e){
-    spotifyApi.getMyCurrentPlaybackState().then(data => {
-      console.log(data);
-      if(data.body !== null){
-        var tempData = data;
-        if(data.body.is_playing){
-          spotifyApi.pause().then((res) => {
-            clearTimeout(trackLoopTimer.current);
-            console.log("Paused");
-            tempData.body.is_playing = !tempData.body.is_playing;
-            set_data(tempData);  
-          }, (err) => { 
-            console.log(err.statusCode);       
-            alert("Please try again. Make sure you have a premium account");
-          });      
-          }
-        else if(!data.body.is_playing) {
-          spotifyApi.play().then(() => {
-            console.log("Resumed");
-            tempData.body.is_playing = !tempData.body.is_playing;
-            set_data(tempData);
-          }, (err) => {
-            console.log(err.statusCode); 
-            alert("Please try again. Make sure you have a premium account");
-          });
-        }  
-      }      
-      else {
-        alert("No active device found, play something on a device")
-      }               
-    })    
+    console.log("TOGGLED")
+    console.log(data.body.is_playing)
+    if(data.body.is_playing){
+      // console.log("handletoggle")
+      // console.log(data.body.is_playing)
+      var temp = {...data}
+      temp.body.is_playing = !temp.body.is_playing
+      set_data(temp)
+      // set_data(prev => ({...prev, body: {is_playing: false, ...prev.body.item}})) 
+      console.log(data)
+    }
+    else if(!data.body.is_playing){
+      var temp = {...data}
+      temp.body.is_playing = !temp.body.is_playing
+      set_data(temp)
+      // set_data(prev => ({...prev, body:{is_playing: true, ...prev.body.item}})) 
+      console.log(data)
+    }
+
+    // spotifyApi.getMyCurrentPlaybackState().then(data => {
+    //   console.log(data);
+    //   if(data.body !== null){
+    //     var tempData = data;
+    //     if(data.body.is_playing){
+    //       spotifyApi.pause().then((res) => {
+    //         clearTimeout(trackLoopTimer.current);
+    //         console.log("Paused");
+    //         tempData.body.is_playing = !tempData.body.is_playing;
+    //         set_data(tempData);  
+    //       }, (err) => { 
+    //         console.log(err.statusCode);       
+    //         alert("Please try again. Make sure you have a premium account");
+    //       });      
+    //       }
+    //     else if(!data.body.is_playing) {
+    //       spotifyApi.play().then(() => {
+    //         console.log("Resumed");
+    //         tempData.body.is_playing = !tempData.body.is_playing;
+    //         set_data(tempData);
+    //       }, (err) => {
+    //         console.log(err.statusCode); 
+    //         alert("Please try again. Make sure you have a premium account");
+    //       });
+    //     }  
+    //   }      
+    //   else {
+    //     alert("No active device found, play something on a device")
+    //   }               
+    // })    
   }
   
 
@@ -693,4 +737,4 @@ function Dashboard({ code }) {
     dashboard
   )
 }
-export default Dashboard;
+export default Preview;
