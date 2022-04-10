@@ -34,9 +34,9 @@ function Library(props) {
         // var type = props.handleIndexType(track, index);
         // console.log(track);
 
-        console.log(`playing: ${props.isPlaying}`);
-        console.log(`track = current track: ${props.currentTrack}`);
-        console.log(track)
+        // console.log(`playing: ${props.isPlaying}`);
+        // console.log(`track = current track: ${props.currentTrack}`);
+        // console.log(track)
         // console.log(`active row: ${props.activeRow}`);
 
         if(props.isPlaying){
