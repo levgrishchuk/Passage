@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 // connect to mongodb database
-db = process.env.mongoURI;
+db = "mongodb+srv://Lev:rHXD3JgNHnuQP3W@cluster0.23cvk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(db)
     .then(() => {
         console.log('Mongoose connected');
