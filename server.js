@@ -41,6 +41,12 @@ app.use('/api/items', require('./routes/api/items'));
 //     app.use(path.join(__dirname, ''))
 // }
 
+const root = path.resolve(__dirname, './public')
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(root))
+  } 
+
 // assign port number
 const PORT = process.env.PORT || 8888;
 
