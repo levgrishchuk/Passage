@@ -19,7 +19,7 @@ app.use(express.json());
 
 // connect to mongodb database
 db = "mongodb+srv://Lev:rHXD3JgNHnuQP3W@cluster0.23cvk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect(db)
     .then(() => {
         console.log('Mongoose connected');
     })
@@ -43,12 +43,11 @@ app.use('/api/items', require('./routes/api/items'));
 
 // const root = path.resolve(__dirname, './client/build')
 
-app.use(express.static("./client/build"))
-    const path = require("path");
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+app.use(express.static(path.join(__dirname, "./client/build")))
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 
-    })
+})
 
 // if (process.env.NODE_ENV == "production") {
 //     // app.use(express.static("build"));
