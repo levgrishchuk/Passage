@@ -19,7 +19,7 @@ app.use(express.json());
 
 // connect to mongodb database
 db = "mongodb+srv://Lev:rHXD3JgNHnuQP3W@cluster0.23cvk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-mongoose.connect(db)
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then(() => {
         console.log('Mongoose connected');
     })
