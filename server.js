@@ -41,7 +41,7 @@ app.use('/api/items', require('./routes/api/items'));
 //     app.use(path.join(__dirname, ''))
 // }
 
-const root = path.resolve(__dirname, './public')
+const root = path.resolve(__dirname, './client/public')
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(root))
