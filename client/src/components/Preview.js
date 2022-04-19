@@ -73,8 +73,7 @@ function Preview() {
           <div id='inputPanel' className='my-2'><InputPanel 
           handleTags={handleTags}
           handleNotes={handleNotes}
-          handleCustomTags={handleCustomTags}
-          handleTags={handleTags}
+          handleCustomTags={handleCustomTags}          
           handleAddingCustomTag={handleAddingCustomTag}
           handleAddingTag={handleAddingTag}
           notes={notes}
