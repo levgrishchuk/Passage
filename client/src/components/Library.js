@@ -138,6 +138,7 @@ function Library(props) {
                 
                 {props.library.map((record, index) => {
                     var test = 1;
+                    // todo: use bootstrap table instead of bootstrap grid
                     return (
                         <Row id={'row-' + index} className={`rowContent flex-nowrap ${index == hoveredRowIndex ? "hovered" : ""}`} style={{marginTop:"0.75rem", marginBottom:"0.75rem"}}
                         onMouseEnter={e => props.handleOnMouseEnter(e, index)}
