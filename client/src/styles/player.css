@@ -30,6 +30,15 @@ button {
     /* font-weight: 600; */
 }
 
+.playerSideButtons:hover{
+    /* background:#b2b2b2; */
+    background:transparent;
+    color: white;
+    fill: white;
+    border-color: white;
+    /* font-weight: 600; */
+}
+
 .trackLooped{
     border-width: 3px;
     border-color: white;

@@ -26,6 +26,8 @@ function Dashboard({ code }) {
   var trackLoopTimer = useRef();
   var testCount = useRef(0);
   var user = useRef();
+  var indexOfSelectedTrack = useRef(-1);
+  var librarySize = useRef(-1);
   
   
 
@@ -38,7 +40,7 @@ function Dashboard({ code }) {
   var [library, set_library] = useState([]);
   var [trackDetails, set_track_details] = useState([]);
   var [libraryState, set_library_state] = useState({hoveredRow: -1});
-  var [activeRow, set_active_row] = useState(-1);
+  const [activeRow, set_active_row] = useState(-1);
   
   const [data, set_data] = useState();
   // const [sliderHandles, set_slider_handles] = useState([Math.round(defaultTimeDuration * 1/5), Math.round(defaultTimeDuration * 2/5)]);
@@ -58,8 +60,8 @@ function Dashboard({ code }) {
     <canvas id="dashboardVisualizer" class="webgl"></canvas>  
     <Container id='dashboard'>
           <div id='top' className='py-2'>
-          {libraryState.hoveredRow}
-          <a href="/"> click me</a>
+          {/* {libraryState.hoveredRow} */}
+          <a href="/" class="dashboardBackButton btn btn-outline-secondary btn-info" role="button">Homepage</a>
           </div>            
           <div id='library' className='my-2'><Library 
           library={library}
@@ -92,9 +94,12 @@ function Dashboard({ code }) {
           handleSave={handleSave}          
           sliderHandles={previousValues.current}
           handleLoopTrack={handleLoopTrack}
+          handleTrackChange={handleTrackChange}
           loopTrack={loopTrack} /></div>            
     </Container>
   </div>
+
+  
 
   // update access token
   useEffect(() => {
@@ -131,6 +136,7 @@ function Dashboard({ code }) {
           // var tempArray = library
           // tempArray.push()
           set_library(res.data)
+          librarySize.current = res.data.length;
           // console.log(res.data);
           // for debugging
           spotifyApi.getMyCurrentPlaybackState().then(data => {
@@ -306,6 +312,30 @@ function Dashboard({ code }) {
     set_library_state({...libraryState, hoveredRow: index});
   }
 
+  function handleTrackChange(e, direction){
+    var current_index = activeRow;
+    // determine if this is a call for next or prev track
+    if(direction === "next"){
+      // increment index of active row, call trackClick for new index and wrap around library size if need be      
+      if(current_index + 1 < librarySize.current){ 
+        console.log(current_index + 1)       
+        handleTrackClick(current_index + 1, "play")
+      }
+      else{
+        handleTrackClick(0, "play")
+      }
+    }
+    else if(direction === "prev"){
+      if(current_index - 1 < 0){
+        handleTrackClick(librarySize.current - 1, "play")
+      }
+      else{
+        handleTrackClick(current_index - 1, "play")
+      }
+    }
+
+  }
+
   // function retryUpdateCurrentUserState(){
 
   // }
@@ -341,7 +371,7 @@ function Dashboard({ code }) {
   }
 
   function updateCurrentUserState(delay=0, index=-1){   
-    return; 
+    // return; 
     var tries = 0;
     function retryFetchUntilUpdate(){      
       if(delay > 0 && tries == 0){
@@ -410,8 +440,9 @@ function Dashboard({ code }) {
     retryFetchUntilUpdate();     
   }
   
-  function handleTrackClick(e, index, action){
-    var elementClassList = document.getElementById(`index-${index}`).classList;
+  function handleTrackClick(index, action, e=null){
+    indexOfSelectedTrack.current = index;
+    // var elementClassList = document.getElementById(`index-${index}`).classList;
     console.log("track clicked");
 
     
@@ -456,7 +487,7 @@ function Dashboard({ code }) {
       }
     else if(action === "pause"){
       set_active_row(-1);  
-      handleTogglePlayback(e);
+      handleTogglePlayback();
       clearDataTimers();
       updateCurrentUserState(500);
     }
@@ -653,7 +684,7 @@ function Dashboard({ code }) {
   // //   }, 1000);       
   // // }
   
-  function handleTogglePlayback(e){
+  function handleTogglePlayback(e=null){
     spotifyApi.getMyCurrentPlaybackState().then(data => {
       console.log(data);
       if(data.body !== null){

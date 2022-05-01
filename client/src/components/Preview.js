@@ -55,8 +55,8 @@ function Preview() {
     <canvas id="dashboardVisualizer" class="webgl"></canvas>  
     <Container id='dashboard'>
           <div id='top' className='py-2'>
-          {libraryState.hoveredRow}
-          <a href="/"> click me</a>
+          {/* {libraryState.hoveredRow} */}
+          <a href="/" class="dashboardBackButton btn btn-outline-secondary btn-info" role="button">Homepage</a>
           </div>            
           <div id='library' className='my-2'><Library 
           library={library}

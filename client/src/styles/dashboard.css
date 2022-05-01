@@ -50,3 +50,17 @@
 #dashboardVisualizer{
     opacity: 0.05;
 }
+
+.dashboardBackButton{
+    background:transparent;
+    color: #b2b2b2;
+    fill: #b2b2b2;
+    border-color: #b2b2b2;
+    margin-left: 12px;
+    /* margin-bottom: ; */
+}
+
+.dashboardBackButton:hover{
+    background:transparent;
+    border-color: white;
+}

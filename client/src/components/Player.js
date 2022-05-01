@@ -46,9 +46,9 @@ function Player(props) {
                         {/* <h1>{props.trackDuration}</h1>  */}
                     </Col>
                     <Col className='playerItems d-flex align-items-center justify-content-center'>
-                    <NextTrackButton id="playerNextTrackButtonLeft"/>                        
+                    <NextTrackButton id="playerNextTrackButtonLeft" onClick={e => props.handleTrackChange(e, "prev")}/>                        
                     {handleToggleRender()}
-                    <NextTrackButton id="playerNextTrackButtonRight"/> 
+                    <NextTrackButton id="playerNextTrackButtonRight" onClick={e => props.handleTrackChange(e, "next")}/> 
                     </Col>
                     <Col className='playerItems d-flex justify-content-start' md="5">
                         <button className="playerSideButtons btn btn-outline-secondary" onClick={props.handleSave}>Save Segment</button>

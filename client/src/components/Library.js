@@ -43,7 +43,7 @@ function Library(props) {
             if(track === props.currentTrack){
                 if(index == props.activeRow){
                     if(hoveredRow == index){
-                        return <TrackPause id="pause" onClick={e => props.handleTrackClick(e, index, "pause")}/>;
+                        return <TrackPause id="pause" onClick={e => props.handleTrackClick(index, "pause", e)}/>;
                     }
                     else{
                         return <TrackEqualizer id="equalizer" />;
@@ -51,7 +51,7 @@ function Library(props) {
                 }
                 else{
                     if(hoveredRow == index){
-                        return <TrackPlay id="play" onClick={e => props.handleTrackClick(e, index, "play")}/>;
+                        return <TrackPlay id="play" onClick={e => props.handleTrackClick(index, "play", e)}/>;
                     }
                     else{
                         return(
@@ -66,7 +66,7 @@ function Library(props) {
             }
             else{
                 if(hoveredRow == index){
-                    return <TrackPlay onClick={e => props.handleTrackClick(e, index, "play")}/>;
+                    return <TrackPlay onClick={e => props.handleTrackClick(index, "play", e)}/>;
                 }
                 else{
                     return(
@@ -79,7 +79,7 @@ function Library(props) {
         }
         else{
             if(hoveredRow == index){
-                return <TrackPlay onClick={e => props.handleTrackClick(e, index, "play")}/>;
+                return <TrackPlay onClick={e => props.handleTrackClick(index, "play", e)}/>;
             }
             else{
                 return(
@@ -139,7 +139,7 @@ function Library(props) {
                 {props.library.map((record, index) => {
                     var test = 1;
                     return (
-                        <Row id={'row-' + index} className={`rowContent ${index == hoveredRowIndex ? "hovered" : ""}`} style={{marginTop:"0.75rem", marginBottom:"0.75rem"}}
+                        <Row id={'row-' + index} className={`rowContent flex-nowrap ${index == hoveredRowIndex ? "hovered" : ""}`} style={{marginTop:"0.75rem", marginBottom:"0.75rem"}}
                         onMouseEnter={e => props.handleOnMouseEnter(e, index)}
                         onMouseLeave={e => props.handleOnMouseLeave(e, index)}
                         // onMouseOver={e => props.handleMouseOver(e, index)}                        
