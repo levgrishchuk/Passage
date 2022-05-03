@@ -11,6 +11,11 @@
 
 .rowContent{
     background: transparent;
+    /* border-bottom-width: 0ch; */
+}
+
+#rowtest{
+  border:none;
 }
 
 .libraryRow{

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Container, Row, Col, FormGroup, FormControl, Form, Tooltip, OverlayTrigger} from 'react-bootstrap';
+import { Container, Row, Col, FormGroup, FormControl, Form, Tooltip, OverlayTrigger, Table} from 'react-bootstrap';
 import '../styles/Library.css';
 import stockImage64x64 from '../assets/symbol_questionmark64x64.png';
 import Tag from './Tag.js';
@@ -103,164 +103,170 @@ function Library(props) {
 
     function renderLibrary(hoveredRowIndex){
         return (
-            <Container className="libraryContainer justify-content-center">
-                <Row className="rowContent headerRow flex-nowrap">
-                    <Col md="auto" className="rowContent">
-                        <div className="genericTextContent secondaryText rowContent headerIndex" style={{width:"2rem", textAlign:"right"}}>
-                            #
-                        </div>
-                    </Col>
-                    <Col md="4" className="rowContent genericTextContent secondaryText">
-                        TITLE
-                    </Col>
-                    <Col md="3" className="rowContent genericTextContent secondaryText">
-                        ALBUM
-                    </Col>
-                    <Col md="2" className="rowContent genericTextContent secondaryText">
-                        NOTES (HOVERABLE)
-                    </Col>
-                    <Col md="auto" className="rowContent genericTextContent secondaryText">
-                        TAGS (HOVERABLE)
-                    </Col>
+            <Table responsive>
+                <thead>
+                    <tr >
+                        <th>
+                            <div style={{width:"2rem", textAlign:"right"}}>
+                                #
+                            </div>
+                        </th>
+                        <th>
+                            TITLE
+                        </th>
+                        <th>
+                            ALBUM
+                        </th>
+                        <th>
+                            NOTES (HOVERABLE)
+                        </th>
+                        <th>
+                            TAGS (HOVERABLE)
+                        </th>
 
-                </Row>
-
-                {/* make shift border that doesn't span the whole bottom width of row above */}
-                {/* <Row className="d-flex justify-content-center">
-                    <Col className="align-self-center" style={{border:"1px solid white", marginRight:"-2rem", marginLeft:"-2rem"}}>
-                    </Col>
-                </Row> */}
-
-                <div className="d-flex justify-content-center headerSeparator" style={{width:"100%"}}>
-                    <div style={{borderTop:"1px solid #acacac", width:"100%"}}></div>
-                </div>
-
-                
-                {props.library.map((record, index) => {
-                    var test = 1;
-                    // todo: use bootstrap table instead of bootstrap grid
-                    return (
-                        <Row id={'row-' + index} className={`rowContent flex-nowrap ${index == hoveredRowIndex ? "hovered" : ""}`} style={{marginTop:"0.75rem", marginBottom:"0.75rem"}}
-                        onMouseEnter={e => props.handleOnMouseEnter(e, index)}
-                        onMouseLeave={e => props.handleOnMouseLeave(e, index)}
-                        // onMouseOver={e => props.handleMouseOver(e, index)}                        
-                        >
-                            <Col md="auto" className="d-flex rowContent indexCol libraryCol align-items-center">
-                                <div className="d-flex align-items-end justify-content-end rowContent typeNumber indexRow" id={`index-${index}`} style={{width:"2rem", textAlign:"right"}}>
-                                    {handleIndexColumn(record.trackUri, index)} 
-                                </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.library.map((record, index) => {
+                        var test = 1;
+                        // todo: use bootstrap table instead of bootstrap grid
+                        return (
+                            <tr id={'row-' + index} className={`rowContent flex-nowrap ${index == hoveredRowIndex ? "hovered" : ""}`} style={{marginTop:"0.75rem", marginBottom:"0.75rem"}}
+                            onMouseEnter={e => props.handleOnMouseEnter(e, index)}
+                            onMouseLeave={e => props.handleOnMouseLeave(e, index)}
+                            // onMouseOver={e => props.handleMouseOver(e, index)}                        
+                            >
+                                <td id="rowtest">
+                                    <div className="d-flex align-items-end justify-content-end rowContent typeNumber indexRow" id={`index-${index}`} style={{width:"2rem", textAlign:"right"}}>
+                                        {handleIndexColumn(record.trackUri, index)} 
+                                    </div>
+                                    
+                                </td>
                                 
-                            </Col>
-                            
-                            <Col md="4" className="rowContent d-flex align-items-center">
-                                <div className="rowContent titleColLeft">
-                                    <img src={handleImageSelection(record.trackInfo.album.images)} style={{height:"40px", width:"40px"}}/>
-                                </div>
+                                <td>
+                                    <div className="rowContent titleColLeft">
+                                        <img src={handleImageSelection(record.trackInfo.album.images)} style={{height:"40px", width:"40px"}}/>
+                                    </div>
 
-                                <div className="rowContent titleColRight">
+                                    <div className="rowContent titleColRight">
+                                        <div className="genericTextContent rowContent" style={{marginBottom:"-0.25rem"}}>
+                                            {record.trackInfo.name}
+                                        </div>
+                                        <div className="secondaryText genericTextContent rowContent" style={{marginTop:"-0.25rem"}} >
+                                            {handleArtists(record.trackInfo.artists)}
+                                        </div>   
+                                    </div>
+
+                                </td>
+                                {/* <td md="auto" className="d-flex rowContent indexCol libraryCol align-items-center">
+                                    <div className="d-flex align-items-end justify-content-end rowContent typeNumber indexRow" id={`index-${index}`} style={{width:"2rem", textAlign:"right"}}>
+                                        {handleIndexColumn(record.trackUri, index)} 
+                                    </div>
+                                    
+                                </td>
+                                <td md="auto" className="rowContent imageCol">
+                                    <img src={handleImageSelection(record.trackInfo.album.images)} style={{height:"40px", width:"40px"}}/>
+                                </td>
+                                <td md="3" className="rowContent libraryCol" >
                                     <div className="genericTextContent rowContent" style={{marginBottom:"-0.25rem"}}>
                                         {record.trackInfo.name}
                                     </div>
                                     <div className="secondaryText genericTextContent rowContent" style={{marginTop:"-0.25rem"}} >
                                         {handleArtists(record.trackInfo.artists)}
-                                    </div>   
-                                </div>
-
-                            </Col>
-                            {/* <Col md="auto" className="d-flex rowContent indexCol libraryCol align-items-center">
-                                <div className="d-flex align-items-end justify-content-end rowContent typeNumber indexRow" id={`index-${index}`} style={{width:"2rem", textAlign:"right"}}>
-                                    {handleIndexColumn(record.trackUri, index)} 
-                                </div>
-                                
-                            </Col>
-                            <Col md="auto" className="rowContent imageCol">
-                                <img src={handleImageSelection(record.trackInfo.album.images)} style={{height:"40px", width:"40px"}}/>
-                            </Col>
-                            <Col md="3" className="rowContent libraryCol" >
-                                <div className="genericTextContent rowContent" style={{marginBottom:"-0.25rem"}}>
-                                    {record.trackInfo.name}
-                                </div>
-                                <div className="secondaryText genericTextContent rowContent" style={{marginTop:"-0.25rem"}} >
-                                    {handleArtists(record.trackInfo.artists)}
-                                </div>                            
-                            </Col> */}
-                            <Col md="3" className="rowContent d-flex align-items-center">
-                                <div className="secondaryText genericTextContent rowContent">
-                                    {record.trackInfo.album.name}
-                                </div>
-                            </Col>
-                            <Col md="2" className="rowContent d-flex align-items-center">
-                            {/* only add tooltip if there is overflow. Implementation is rudimentary until better workaround can be found */}
-                            {record.notes.length > 37
-                            ? (
-                                <OverlayTrigger  
-                                    onMouseLeave={e => handleMouseLeave(e, index)}                                  
-                                    key={index}
-                                    placement='bottom'
-                                    overlay={
-                                        <Tooltip id={`notes-${index}`}
-                                        >
-                                            {record.notes}
-                                        </Tooltip>
-                                    }>
-                                    <div className="genericTextContent secondaryText rowContent">{record.notes}</div>
-                                </OverlayTrigger>        
-                            )
-                            : (
-                                <div className="genericTextContent secondaryText rowContent">{record.notes}</div> 
-                            )}                                                  
-                                                        
-                            </Col>
-                            <Col className="rowContent d-flex align-items-center" id="tagTrayCol" style={{overflowX:"auto"}}>
-                                {/* <div className="rowContent"> */}
-                                <OverlayTrigger                                    
-                                    key={index}
-                                    placement='bottom'
-                                    overlay={
-                                        <Tooltip id={`tags-${index}`}>
-                                            <Stack className="tagTrayLibrary" direction="horizontal" gap={3}>
-                                    {record.tags.map((tag, index) => {
-                                            return (<Tag className="tagTrayLibraryContent" key={index} value={tag} deletable={false} />)
-                                        })}
-                                </Stack>
-                                        </Tooltip>
-                                    }>
-                                    <Stack className="tagTray tagTrayLibrary" direction="horizontal" gap={3}>
-                                    {record.tags.map((tag, index) => {
-                                            return (<Tag className="tagTrayLibraryContent" key={index} value={tag} deletable={false} />)
-                                        })}
-                                </Stack>
-                                </OverlayTrigger> 
-                                
+                                    </div>                            
+                                </td> */}
+                                <td>
+                                    <div className="secondaryText genericTextContent rowContent">
+                                        {record.trackInfo.album.name}
+                                    </div>
+                                </td>
+                                <td>
+                                {/* only add tooltip if there is overflow. Implementation is rudimentary until better workaround can be found */}
+                                {record.notes.length > 37
+                                ? (
+                                    <OverlayTrigger  
+                                        onMouseLeave={e => handleMouseLeave(e, index)}                                  
+                                        key={index}
+                                        placement='bottom'
+                                        overlay={
+                                            <Tooltip id={`notes-${index}`}
+                                            >
+                                                {record.notes}
+                                            </Tooltip>
+                                        }>
+                                        <div className="genericTextContent secondaryText rowContent">{record.notes}</div>
+                                    </OverlayTrigger>        
+                                )
+                                : (
+                                    <div className="genericTextContent secondaryText rowContent">{record.notes}</div> 
+                                )}                                                  
+                                                            
+                                </td>
+                                <td id="tagTrayCol" style={{overflowX:"auto"}}>
+                                    {/* <div className="rowContent"> */}
+                                    <OverlayTrigger                                    
+                                        key={index}
+                                        placement='bottom'
+                                        overlay={
+                                            <Tooltip id={`tags-${index}`}>
+                                                <Stack className="tagTrayLibrary" direction="horizontal" gap={3}>
+                                        {record.tags.map((tag, index) => {
+                                                return (<Tag className="tagTrayLibraryContent" key={index} value={tag} deletable={false} />)
+                                            })}
+                                    </Stack>
+                                            </Tooltip>
+                                        }>
+                                        <Stack className="tagTray tagTrayLibrary" direction="horizontal" gap={3}>
+                                        {record.tags.map((tag, index) => {
+                                                return (<Tag className="tagTrayLibraryContent" key={index} value={tag} deletable={false} />)
+                                            })}
+                                    </Stack>
+                                    </OverlayTrigger> 
                                     
-                                {/* </div> */}
+                                        
+                                    {/* </div> */}
+                                    
+                                </td>
                                 
-                            </Col>
-                            
-                        </Row>
-                        // <div className="d-flex align-items-center">
-                        //     <div style={{width:"2rem", textAlign:"right", margin:"1rem"}}>                            
-                        //         {index + 1}  
-                        //     </div>
-                        //     <img src={record.images.length == 3 ? record.images[2].url : "nothing"} style={{height:"64px", width:"64px", margin:"1rem"}}/>
-                        //     <div style={{margin:"1rem"}}>
-                        //         <div >
-                        //             {record.notes}
-                        //         </div>
-                        //         <div className="text-muted" >
-                        //             {record.notes}
-                        //         </div>
-                        //     </div>
-                        //     <div style={{marginLeft:"10rem", a}}>
-                        //         {record.notes}
-                        //     </div>
-                            
-                        // </div>                
-                    )
-                })}
+                            </tr>
+                            // <div className="d-flex align-items-center">
+                            //     <div style={{width:"2rem", textAlign:"right", margin:"1rem"}}>                            
+                            //         {index + 1}  
+                            //     </div>
+                            //     <img src={record.images.length == 3 ? record.images[2].url : "nothing"} style={{height:"64px", width:"64px", margin:"1rem"}}/>
+                            //     <div style={{margin:"1rem"}}>
+                            //         <div >
+                            //             {record.notes}
+                            //         </div>
+                            //         <div className="text-muted" >
+                            //             {record.notes}
+                            //         </div>
+                            //     </div>
+                            //     <div style={{marginLeft:"10rem", a}}>
+                            //         {record.notes}
+                            //     </div>
+                                
+                            // </div>                
+                        )
+                    })}
+                </tbody>
+                
+
+                {/* make shift border that doesn't span the whole bottom width of row above */}
+                {/* <tr className="d-flex justify-content-center">
+                    <td className="align-self-center" style={{border:"1px solid white", marginRight:"-2rem", marginLeft:"-2rem"}}>
+                    </td>
+                </tr> */}
+
+                {/* <div className="d-flex justify-content-center headerSeparator" style={{width:"100%"}}>
+                    <div style={{borderTop:"1px solid #acacac", width:"100%"}}></div>
+                </div> */}
+
+                
+                
                 {/* <TrackEqualizer /> */}
                 
-            </Container>    
+            </Table>    
         )
     }
 
