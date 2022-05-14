@@ -6,6 +6,10 @@ import { useState, useEffect } from 'react';
 import { ReactComponent as PlayButton } from "../assets/playerPlay.svg";
 import { ReactComponent as PauseButton } from "../assets/playerPause.svg";
 import { ReactComponent as NextTrackButton } from "../assets/playerNextTrack.svg";
+import { ReactComponent as DeleteIconButton } from "../assets/playerDelete.svg";
+import { ReactComponent as EditIconButton } from "../assets/playerEdit.svg";
+import { ReactComponent as LoopIconButton } from "../assets/playerLoop.svg";
+import { ReactComponent as SaveIconButton } from "../assets/playerSave.svg";
 import { timestampFormat } from 'concurrently/src/defaults';
 // import { ReactComponent as SaveButton } from "../assets/playerSave.svg";
 
@@ -40,20 +44,27 @@ function Player(props) {
     return (
         <Container className='playerItems' id='controlsContainer'>                     
             <Row id='controlsRow' className="playerItems m-2">                
-                <Col id='controls' className='playerItems d-flex align-items-center'>
-                    <Col className='playerItems d-flex justify-content-end' md="5">
-                        <button className={`playerSideButtons ${props.loopTrack == true ? "trackLooped" : ""} btn btn-outline-secondary`} onClick={props.handleLoopTrack}>Loop Segment</button>
-                        {/* <h1>{props.trackDuration}</h1>  */}
-                    </Col>
-                    <Col className='playerItems d-flex align-items-center justify-content-center'>
-                    <NextTrackButton id="playerNextTrackButtonLeft" onClick={e => props.handleTrackChange(e, "prev")}/>                        
-                    {handleToggleRender()}
-                    <NextTrackButton id="playerNextTrackButtonRight" onClick={e => props.handleTrackChange(e, "next")}/> 
-                    </Col>
-                    <Col className='playerItems d-flex justify-content-start' md="5">
-                        <button className="playerSideButtons btn btn-outline-secondary" onClick={props.handleSave}>Save Segment</button>
-                        {/* <h1>{props.trackDuration}</h1>  */}
-                    </Col>
+                <Col id='controls' className='playerItems d-flex'>
+                    <div className='playerItems d-flex controlsWrapper'>
+                        <DeleteIconButton onClick={props.handleDelete}/>
+                        <LoopIconButton className={`playerButtons playerMobileIcons ${props.loopTrack == true ? "trackIconLooped" : ""}`} onClick={props.handleLoopTrack}/>
+                        {/* <div className="playerLeftButtonWrapper d-inline-flex justify-evenly">                            
+                            <button id="playerLoopButton" className={`playerSideButtons ${props.loopTrack == true ? "trackLooped" : ""} btn btn-outline-secondary`} onClick={props.handleLoopTrack}>Loop Segment</button>
+                        </div> */}
+                        {/* <div className="playerMiddleButtonWrapper"> */}
+                            <NextTrackButton id="playerNextTrackButtonLeft" onClick={e => props.handleTrackChange(e, "prev")}/>                        
+                            {handleToggleRender()}
+                            <NextTrackButton id="playerNextTrackButtonRight" onClick={e => props.handleTrackChange(e, "next")}/> 
+                        {/* </div> */}
+                        
+                        
+                        {/* <div className="playerRightButtonWrapper d-inline-flex justify-evenly">
+                            <button id="playerSaveButton" className="playerSideButtons btn btn-outline-secondary" onClick={props.handleSave}>Save Segment</button>
+                            
+                        </div> */}
+                        <SaveIconButton onClick={props.handleSave}/>
+                        <EditIconButton onClick={props.handleEdit}/>
+                    </div>               
                     
                 </Col>
                               

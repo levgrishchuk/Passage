@@ -3,6 +3,7 @@ const router = express.Router();
 
 // Item model
 const Item = require('../../models/Item');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 // @route   GET api/items
 // @desc    Get items
@@ -28,10 +29,33 @@ router.post('/', (req, res) => {
     newItem.save().then(newItem => res.json(newItem));   
 });
 
+// @route   POST api/items/update
+// @desc    Update item
+// @access  Public
+router.post('/update', (req, res) => {
+    var constructor = {        
+        user: req.body.user,
+        start: req.body.start,
+        finish: req.body.finish,
+        trackUri: req.body.trackUri
+    }    
+    if(req.body.notes){
+        constructor.notes = req.body.notes
+    }   
+    if(req.body.tags.length != 0){
+        constructor.tags = req.body.tags
+    }
+    console.log(constructor)
+    // const newItem = new Item(constructor);  
+    Item.findOneAndUpdate({_id: ObjectId(req.body._id)}, constructor).then(newItem => res.json(newItem));
+});
+
 // @route   DELETE api/items
 // @desc    Delete item
 // @access  Public
 router.delete('/:id', (req, res) => {
+    console.log("ID:!!!!!!!!!!!!!!!!")
+    console.log(req.params.id)
     Item.findById(req.params.id)
         .then(item => item.remove().then(() => res.json({success: true})))
         .catch(err => res.status(404).json({success: false}));

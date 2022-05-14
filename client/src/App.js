@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/bootstrap-8k.css'
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Preview from './components/Preview';

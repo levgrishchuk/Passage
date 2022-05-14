@@ -8,6 +8,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import InputPanel from "./InputPanel";
 import Library from "./Library";
+import Swal from 'sweetalert2';
 
 const spotifyApi = new SpotifyWebApi({
     clientId: "a51237d57ccc4dbf9f1162c378934b9c"
@@ -37,6 +38,7 @@ function Preview() {
   var [trackDetails, set_track_details] = useState([]);
   var [libraryState, set_library_state] = useState({hoveredRow: -1});
   var [activeRow, set_active_row] = useState(-1);
+  var [selectedRow, set_selected_row] = useState(-1);
   
   const [data, set_data] = useState({body:{is_playing:false, item:{uri:"spotify:track:5qjJbjKzqYBhUL3Fk34yPl"}}});
   // const [sliderHandles, set_slider_handles] = useState([Math.round(defaultTimeDuration * 1/5), Math.round(defaultTimeDuration * 2/5)]);
@@ -46,7 +48,8 @@ function Preview() {
   var trackLoopRef = useRef(loopTrack);
 
   useEffect(() => {
-    visualizer()    
+    visualizer()
+    Swal.fire('Any fool can use a computer') 
   }, [])
 
 
@@ -69,7 +72,9 @@ function Preview() {
           handleIndexType={handleIndexType}
           currentTrack={data ? data.body.item.uri : null}
           isPlaying={data ? data.body.is_playing : null}
-          activeRow={activeRow} /></div>
+          activeRow={activeRow}
+          selectedRow={selectedRow}
+          handleSelectRow={handleSelectRow} /></div>
           <div id='inputPanel' className='my-2'><InputPanel 
           handleTags={handleTags}
           handleNotes={handleNotes}
@@ -89,7 +94,9 @@ function Preview() {
           handleSave={handleSave}          
           sliderHandles={previousValues.current}
           handleLoopTrack={handleLoopTrack}
-          loopTrack={loopTrack} /></div>            
+          loopTrack={loopTrack} 
+          handleEdit={handleEdit}
+          handleDelete={handleDelete} /></div>            
     </Container>
   </div> 
 
@@ -312,6 +319,16 @@ function Preview() {
     set_library_state({...libraryState, hoveredRow: index});
   }
 
+  function handleSelectRow(e, index){
+    if(selectedRow == -1 || index != selectedRow){
+      set_selected_row(index);
+    }
+    else {
+      set_selected_row(-1);
+    }
+    
+  }
+
   // function retryUpdateCurrentUserState(){
 
   // }
@@ -416,8 +433,8 @@ function Preview() {
     // retryFetchUntilUpdate();     
   }
   
-  function handleTrackClick(e, index, action){
-    var elementClassList = document.getElementById(`index-${index}`).classList;
+  function handleTrackClick(index, action, e){
+    // var elementClassList = document.getElementById(`index-${index}`).classList;
     console.log("track clicked");
 
     if(action === "play"){
@@ -603,6 +620,14 @@ function Preview() {
     // else{
     //   alert("error with saving (client error)");
     // }
+  }
+
+  function handleEdit(e){
+    return
+  }
+
+  function handleDelete(e){
+    return
   }
 
   function handleTagDelete(e, value){

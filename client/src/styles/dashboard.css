@@ -3,10 +3,17 @@
     flex-direction: column;
     align-content: center;
     height: 100vh; 
+    max-width:100%;   
     position: relative; 
     /* background: linear-gradient(to bottom, #423081, #121212 200px);   */
     /* background: linear-gradient(to bottom, #423081, #121212fb 200px);   */
     background: linear-gradient(to bottom, #423081, #121212c0 200px);  
+}
+
+@media (min-width: 1200px) {
+    #dashboard{
+        width: 68.75%;
+    }
 }
 
 #player {
@@ -51,6 +58,12 @@
     opacity: 0.05;
 }
 
+@media (max-width: 1200px) {
+    #dashboardVisualizer{
+        opacity: 0.3;
+    }
+}
+
 .dashboardBackButton{
     background:transparent;
     color: #b2b2b2;
@@ -58,6 +71,7 @@
     border-color: #b2b2b2;
     margin-left: 12px;
     /* margin-bottom: ; */
+    border-width: 0.0625rem;
 }
 
 .dashboardBackButton:hover{
