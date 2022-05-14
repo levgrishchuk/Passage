@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.12db7aab.chunk.css",
+    "main.js": "/static/js/main.e35aff18.chunk.js",
+    "main.js.map": "/static/js/main.e35aff18.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7545a8a1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7545a8a1.js.map",
+    "static/css/2.9cf6b58f.chunk.css": "/static/css/2.9cf6b58f.chunk.css",
+    "static/js/2.e96c4cb9.chunk.js": "/static/js/2.e96c4cb9.chunk.js",
+    "static/js/2.e96c4cb9.chunk.js.map": "/static/js/2.e96c4cb9.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.9cf6b58f.chunk.css.map": "/static/css/2.9cf6b58f.chunk.css.map",
+    "static/css/main.12db7aab.chunk.css.map": "/static/css/main.12db7aab.chunk.css.map",
+    "static/js/2.e96c4cb9.chunk.js.LICENSE.txt": "/static/js/2.e96c4cb9.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/LemonMilkMedium-mLZYV.3d615d97.otf",
+    "static/media/Spotify_Logo_CMYK_Green.8eef091b.png": "/static/media/Spotify_Logo_CMYK_Green.8eef091b.png",
+    "static/media/playerDelete.fdc7c581.svg": "/static/media/playerDelete.fdc7c581.svg",
+    "static/media/playerEdit.f616b71a.svg": "/static/media/playerEdit.f616b71a.svg",
+    "static/media/playerLoop.a0bd9417.svg": "/static/media/playerLoop.a0bd9417.svg",
+    "static/media/playerNextTrack.1fb912cf.svg": "/static/media/playerNextTrack.1fb912cf.svg",
+    "static/media/playerPause.1ecd6fd8.svg": "/static/media/playerPause.1ecd6fd8.svg",
+    "static/media/playerPlay.ae3d3d46.svg": "/static/media/playerPlay.ae3d3d46.svg",
+    "static/media/playerSave.6e661470.svg": "/static/media/playerSave.6e661470.svg",
+    "static/media/plusSign.a18cb713.svg": "/static/media/plusSign.a18cb713.svg",
+    "static/media/trackPause.916ad603.svg": "/static/media/trackPause.916ad603.svg",
+    "static/media/trackPlay.0a214e9f.svg": "/static/media/trackPlay.0a214e9f.svg",
+    "static/media/trackPlaying.79e9b982.svg": "/static/media/trackPlaying.79e9b982.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7545a8a1.js",
+    "static/css/2.9cf6b58f.chunk.css",
+    "static/js/2.e96c4cb9.chunk.js",
+    "static/css/main.12db7aab.chunk.css",
+    "static/js/main.e35aff18.chunk.js"
+  ]
+}
