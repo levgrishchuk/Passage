@@ -13,6 +13,7 @@ function Login() {
     
     return (
         <Container id="loginContainer">
+            {/* Visualizer */}
             <canvas class="webgl" id="loginVisualizer"></canvas>
             <div className='login'>
                 <img alt='Spotify logo' src={SpotifyLogo}></img>
