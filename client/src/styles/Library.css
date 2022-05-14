@@ -1,5 +1,5 @@
 .genericTextContent {
-    font-size:medium;
+    font-size:1rem;
     overflow:hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -11,6 +11,8 @@
 
 .rowContent{
     background: transparent;
+    /* overflow-x: hidden; */
+    align-items: center;
 }
 
 .libraryRow{
@@ -99,13 +101,25 @@
 scrollbar-width: none;  /* Firefox */
 }
 
+/* .libraryInnerWrapper {
+  background:transparent;
+  border: 0.0625rem #acacac solid;
+  border-bottom-width:0;
+  border-top-width:0;
+  border-left-width:0;
+} */
+
 .libraryContainer{  
   background-color: transparent;
+  /* outline: 1px green solid; */
+  /* box-sizing: content-box; */
+  /* overflow-x:hidden; */
 }
 
 .titleColRight{
   /* calculation used by col's to calculate gap size. Used by divs instead */
   padding-left: calc(var(--bs-gutter-x) * .5);
+  overflow-x: hidden;  
 }
 
 .titleColLeft{
@@ -118,7 +132,7 @@ scrollbar-width: none;  /* Firefox */
 
 .secondaryText{
     color:#acacac;
-    font-size: 90%;
+    font-size: 0.9rem;
 }
 
 /* $maxBar: 1rem; */
@@ -310,3 +324,31 @@ scrollbar-width: none;  /* Firefox */
       height: calc(var(--max-height) * calc(210/224));
     }
   } */
+
+.selectedRow {
+  background: #5a5a5a;
+}
+
+.resizableCol{
+  flex-shrink: 1;
+}
+
+@media (max-width: 576px) {
+  .indexCol, .indexColHeader{
+    max-width: 4rem;
+  }
+  .titleColHeader, .titleCol {
+    overflow-x: hidden;
+    flex-shrink: 1;
+  }
+}
+
+/* @media (min-width: 576px) and (max-width: 768px) {
+  .indexCol, .indexColHeader{
+    max-width: 4rem;
+  }
+  .titleColHeader, .titleCol, .notesCol {
+    overflow-x: hidden;
+    flex-shrink: 1;
+  }
+} */

@@ -1,4 +1,4 @@
-* {
+*:not(.swal2-popup > *) {
     background-color: black;
 }
 
@@ -10,7 +10,7 @@
     outline: none;
     /* z-index: 0; */
     /* background-color: transparent; */
-    opacity: 0.05;
+    opacity: 0.1;
 }
 
 .login {
@@ -23,17 +23,19 @@
     flex-direction: column;
     /* z-index: 5; */
     /* flex-shrink: 5; */
+    overflow: hidden;
 }
 
 
 
 .login > img {     
-    width: 20%;
-    height: auto;
+    width: clamp(4.85rem, 20%, 20%);
+    height: auto;    
     margin-top: 5vh;
     /* margin-left:80vw; */
     alt: unset;
     background-color: transparent;
+    /* align-self: center; */
     
 }
 
@@ -42,39 +44,94 @@
 #projectName{
     /* display:flex; */
     font-family: mainTitleFont;
-    font-size: 15vw;
+    font-size: clamp(3.8rem, 15vw, 15vw);
     color:#1ab26b;
     background-color: transparent;
+    /* margin-bottom: 15vh; */
+    /* font-size-adjust: ; */
 }
 
-#loginButtonContainer{
+.loginButtonContainer{
+    /* align-items: flex-end; */
     width:100%;
+    display:inline-flex;
+    justify-content: center;    
+    flex-wrap: wrap;
+    column-gap: 15rem;
+    /* flex-grow: 1;
+    margin-bottom: 10rem; */
+
+}
+
+.leftSection {
+    /* margin-right:0;     */
+    
+    width:16rem;
+    max-width:50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    
+}
+
+.rightSection {
+    width:16rem;
+    max-width:50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+
+
+@media (max-width:992px) {
+    .loginButtonContainer {
+        margin-top: 20vh;
+    } 
+
+    .rightSection {
+        /* margin-left:0;     */
+        margin-top: 10vh;
+    }
 }
 
 .loginButtonContainerItems{
     /* flex-wrap: wrap; */
     background-color: transparent;
     /* gap: 5; */
+    /* padding-top: 0.5rem;
+    padding-bottom: 0.5rem; */
 }
 
 .loginButtonSpan{
     /* display:block; */
     background-color: transparent;
     font-style: italic;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight:1000;
     text-align:center;
     /* max-height: 15vh; */
     text-transform: uppercase;
-    padding-left:64px;
-    padding-right:64px;
-    
+    padding-left:4rem;
+    padding-right:4rem;
+    line-height: 1.25rem;
+    width: 24rem;
 
 }
 
 #textBlockLeft, #textBlockRight{
     background-color: transparent;
 }
+
+
+.transparentContainer {
+    background: transparent;
+}
+
 
 #textBlockLeft{
     /* margin-right: 2vw; */
@@ -91,23 +148,45 @@
 .loginButtonSpan2 {    
     font-family: Arial, Helvetica, sans-serif;
     /* width: 100%; */
-    font-size: 14px;
+    font-size: 1rem;
     /* max-width: 40%; */
-    padding: 14px 32px;
+    padding: 0.875rem 2rem;
     /* background-color: #1db954; */
     background-color: #1ab26b;
-    border-radius: 50px;  
-    font-weight:1000;
+    border-radius: 31.25rem;  
+    font-weight:700;
     text-transform: uppercase;   
     color: black;
     text-align:center;
-    width:fit-content;
-    /* max-height: 5rem; */
+    width:16rem;
+    height:3rem;
+    /* max-height: 5rem; */ 
+    display:flex;
+    justify-content: center;
+    align-items: center;
     
+       
+}
+
+.loginButtonSpanWrapper {
+    width:17rem;
+    height:3.25rem;
+    display:flex;
+    justify-self: center;
+    
+    align-items: center;
+    background: transparent;
+}
+
+.loginButtonSpan2:hover {
+    width:17rem;
+    height:3.25rem;
+    font-size: 1.05rem;
 }
 
 #loginClickLeft, #loginClickRight{
     text-decoration: none;
+    margin-bottom: 0.75rem; 
 }
 
 

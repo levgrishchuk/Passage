@@ -40,7 +40,8 @@ function Dashboard({ code }) {
   var [library, set_library] = useState([]);
   var [trackDetails, set_track_details] = useState([]);
   var [libraryState, set_library_state] = useState({hoveredRow: -1});
-  const [activeRow, set_active_row] = useState(-1);
+  var [selectedRow, set_selected_row] = useState(-1);
+  const [activeRow, set_active_row] = useState(-1);  
   
   const [data, set_data] = useState();
   // const [sliderHandles, set_slider_handles] = useState([Math.round(defaultTimeDuration * 1/5), Math.round(defaultTimeDuration * 2/5)]);
@@ -74,7 +75,9 @@ function Dashboard({ code }) {
           handleIndexType={handleIndexType}
           currentTrack={data ? data.body.item.uri : null}
           isPlaying={data ? data.body.is_playing : null}
-          activeRow={activeRow} /></div>
+          activeRow={activeRow} 
+          selectedRow={selectedRow}
+          handleSelectRow={handleSelectRow} /></div>
           <div id='inputPanel' className='my-2'><InputPanel 
           handleTags={handleTags}
           handleNotes={handleNotes}
@@ -95,7 +98,9 @@ function Dashboard({ code }) {
           sliderHandles={previousValues.current}
           handleLoopTrack={handleLoopTrack}
           handleTrackChange={handleTrackChange}
-          loopTrack={loopTrack} /></div>            
+          loopTrack={loopTrack} 
+          handleEdit={handleEdit}
+          handleDelete={handleDelete} /></div>            
     </Container>
   </div>
 
@@ -310,6 +315,16 @@ function Dashboard({ code }) {
 
   function handleMouseOver(e, index){
     set_library_state({...libraryState, hoveredRow: index});
+  }
+
+  function handleSelectRow(e, index){
+    if(selectedRow == -1 || index != selectedRow){
+      set_selected_row(index);
+    }
+    else {
+      set_selected_row(-1);
+    }
+    
   }
 
   function handleTrackChange(e, direction){
@@ -600,9 +615,70 @@ function Dashboard({ code }) {
         tags: tagsTray
         }).then(res => {
           console.log(res);
+          spotifyApi.getMe().then(data => {
+            user.current = data.body.display_name;
+            fetchLibrary(data, ["50b3753a7ed653a553c26c8585fc5818(preview)", data.body.display_name])
+            // fetchLibrary(data, data.body.display_name)      
+          })
           clearDashboard();          
         })
         .catch(() => {            
+            alert("error with saving (server error)");
+        })
+    }
+    else{
+      alert("error with saving (client error)");
+    }
+  }
+
+  function handleEdit(e){
+    // console.log(library)
+    if(selectedRow == -1) alert("Select a segment to edit")
+    console.log(!notes, tagsTray.length == 0)
+    var request = {
+        _id: library[selectedRow]._id,
+        user: user.current,
+        start: previousValues.current[0],
+        finish: previousValues.current[1],
+        trackUri: library[selectedRow].trackUri,
+        notes: notes,
+        tags: tagsTray
+    }
+    if(library){
+      console.log(request)
+      axios.post('/api/items/update', request).then(res => {
+          console.log(res);
+          spotifyApi.getMe().then(data => {
+            user.current = data.body.display_name;
+            fetchLibrary(data, ["50b3753a7ed653a553c26c8585fc5818(preview)", data.body.display_name])
+            // fetchLibrary(data, data.body.display_name)      
+          })
+          clearDashboard();          
+        })
+        .catch((e) => {   
+            console.log(e)         
+            alert("error with saving (server error)");
+        })
+    }
+    else{
+      alert("error with saving (client error)");
+    }
+  }
+
+  function handleDelete(e){
+    if(selectedRow == -1) alert("Select a segment to delete")
+    if(library){      
+      axios.delete(`/api/items/${library[selectedRow]._id}`).then(res => {
+          console.log(res);
+          spotifyApi.getMe().then(data => {
+            user.current = data.body.display_name;
+            fetchLibrary(data, ["50b3753a7ed653a553c26c8585fc5818(preview)", data.body.display_name])
+            // fetchLibrary(data, data.body.display_name)      
+          })
+          clearDashboard();          
+        })
+        .catch((e) => {   
+            console.log(e)         
             alert("error with saving (server error)");
         })
     }

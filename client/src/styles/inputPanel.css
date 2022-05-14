@@ -4,8 +4,8 @@
 } */
 
 .tagTrayInputPanel{
-    padding-right: var(--bs-gutter-x,.75rem);
-    padding-left: var(--bs-gutter-x,.75rem);
+    /* padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem); */
     margin-bottom: 0.5rem;
 }
 
@@ -15,8 +15,12 @@ textarea{
     min-height: 3rem;
     resize:none;
     border-radius: 15%;
-    border: 10px solid yellow;
+    border: 0.625rem solid yellow;
     background: white;
+}
+
+.transparentContainer {
+    background:transparent;
 }
 
 .plusSign{
@@ -38,6 +42,7 @@ textarea{
 .inputPanelInput{
     background-color:transparent;
     color:#b2b2b2;
+    border-width: 0.0625rem;
 
 }
 
@@ -67,6 +72,12 @@ select:focus{
     background-color:transparent;
 }
 
+#textAreaInputPanel {
+    border-width: 0.0625rem;
+}
 
 
-
+select, input {
+    overflow:hidden;
+    text-overflow: ellipsis;
+}

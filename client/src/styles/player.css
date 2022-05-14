@@ -12,8 +12,8 @@ button {
 
 .playerButtons {
     /* margin-right: 2em; */
-    margin-left:1rem;
-    margin-right:1rem;
+    /* margin-left:1rem;
+    margin-right:1rem; */
     background:transparent;
     fill:white;
 }
@@ -22,12 +22,36 @@ button {
     /* margin:0.5rem; */
 }
 
+.playerMobileIcons{
+    /* margin-left:0.375rem;
+    margin-right:0.375rem; */
+    margin:0px;
+}
+
 .playerSideButtons{
     /* background:#b2b2b2; */
     background:transparent;
     color: #b2b2b2;
     fill: #b2b2b2;
+    border-width: 0.0625rem;
     /* font-weight: 600; */
+}
+
+/* #playerLoopButton {
+    box-sizing: border-box;
+    width: 3rem;
+    height: 3rem;
+} */
+#playerLoopButton.btn {
+    box-sizing: border-box;
+    width: 9rem;
+    height: 3rem;
+ }
+
+#playerSaveButton.btn {
+    box-sizing: border-box;
+    width: 9rem;
+    height: 3rem;
 }
 
 .playerSideButtons:hover{
@@ -39,12 +63,40 @@ button {
     /* font-weight: 600; */
 }
 
+
+@media (max-width:768px) {
+    #playerSaveButton, #playerLoopButton {
+        display:none;
+    }
+}
+.playerLeftButtonWrapper {
+    background: transparent;
+    justify-content: space-between;
+    width:20%;
+}
+
+.playerMiddleButtonWrapper {
+    background: transparent;
+    width:60%;
+    /* justify-content:space-evenly; */
+}
+
+.playerRightButtonWrapper {
+    background: transparent;
+    /* justify-content: space-between; */
+    width:20%;
+}
+
 .trackLooped{
-    border-width: 3px;
+    border-width: 0.1875rem;
     border-color: white;
     /* background:#b2b2b2; */
     color: white;
     font-weight:bold;
+}
+
+.trackIconLooped {
+    fill: #1ab26b;
 }
 
 #playerNextTrackButtonLeft{
@@ -66,6 +118,86 @@ button {
     background-color: transparent;
 }
 
+.controlsWrapper{
+    width:20rem;
+    max-width: 100%;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.transparentContainer {
+    background:transparent;
+}
+
+/* @media (max-width:992px) {
+    .controlsWrapper{
+        width:60%;        
+    }
+}
+
+@media (max-width:768px) {
+    .controlsWrapper{
+        width:100%;        
+    }
+} */
+
+#controls{
+    justify-content: center;
+}
+
 .rc-slider-tooltip, .rc-slider-tooltip-arrow{
     background: transparent;
 }
+
+
+@media (min-width: 1200px) {
+    .rc-slider-handle {
+        width: 0.875rem;
+        height: 0.875rem;
+        margin-top: -0.3125rem;
+    }
+    .rc-slider-rail {
+        height: 0.25rem;        
+    }
+    /* .rc-slider-tooltip{
+        height: 1.5rem;    
+        
+    } */
+
+    /* .rc-slider-tooltip-arrow {
+        bottom: 0.25rem;
+        left: 50%;
+        margin-left: -0.25rem;
+        border-width: 0.25rem 0.25rem 0;
+        border-top-color: #6c6c6c;
+    } */
+
+
+
+    
+    .rc-slider-tooltip-inner {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.125rem;
+        min-width: 1.5rem;
+        height: 1.5rem;        
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6c6c6c;
+        border-radius: 0.375rem;
+        box-shadow: 0 0 0.25rem #d9d9d9;
+    }
+    .rc-slider-tooltip-placement-top {
+        padding: 0.25rem 0 0.5rem 0;
+    }
+
+    .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {
+        bottom: 0.25rem;
+        left: 50%;
+        margin-left: -0.25rem;
+        border-width: 0.25rem 0.25rem 0;
+        border-top-color: #6c6c6c;
+    }
+}
+

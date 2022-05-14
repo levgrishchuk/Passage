@@ -20,7 +20,7 @@ function InputPanel(props) {
             <Row className="inputPanelItems align-items-start">            
                 <Col className="inputPanelItems" md="6">   
                     <label className="inputPanelItems inputPanelLabels" for="textAreaInputPanel">Notes</label>               
-                    <textarea className="form-control inputPanelInput" id="textAreaInputPanel" placeholder="Enter your notes here" rows="1" value={props.notes} onChange={props.handleNotes}></textarea>
+                    <textarea className="form-control inputPanelInput" id="textAreaInputPanel" placeholder="Enter your notes here" rows="2" value={props.notes} onChange={props.handleNotes}></textarea>
                     
                 </Col>
 
@@ -47,20 +47,27 @@ function InputPanel(props) {
                             
                 </Col>
             </Row> 
+            <Row className="transparentContainer">
+                <Col className="transparentContainer">
+                    <div className="inputPanelItems transparentContainer">
+                        {props.tagsTray.length > 0
+                            ? 
+                            <Stack className="tagTray tagTrayInputPanel" direction="horizontal" gap={3}>
+                                {props.tagsTray.map(value => {
+                                    return <Tag key={value} value={value} deletable={true} handleTagDelete={props.handleTagDelete} />
+                                })} 
+                            </Stack> 
+                            : 
+                            <Stack className="tagTray tagTrayInputPanel" direction="horizontal" gap={3}>
+                                <Tag  value="Sample tag" deletable={true} handleTagDelete={props.handleTagDelete} />
+                            </Stack>}            
+                    </div>
+                </Col>
+            </Row>
             
                     
         </Container>
-        <div className="inputPanelItems">
-        {props.tagsTray.length > 0
-            ? <Stack className="tagTray tagTrayInputPanel" direction="horizontal" gap={3}>
-                {props.tagsTray.map(value => {
-                    return <Tag key={value} value={value} deletable={true} handleTagDelete={props.handleTagDelete} />
-                })} 
-            </Stack> 
-            : <Stack className="tagTray tagTrayInputPanel" direction="horizontal" gap={3}>
-                <Tag  value="Sample tag" deletable={true} handleTagDelete={props.handleTagDelete} />
-            </Stack>}            
-        </div>
+        
         
         
     </div>

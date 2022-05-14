@@ -30,6 +30,8 @@ function Library(props) {
     //   "equalizer": <TrackEqualizer />};    
     var hoveredRow = props.libraryState.hoveredRow;
 
+    console.log(props.selectedRow)
+
     function handleIndexColumn(track, index){
         // var type = props.handleIndexType(track, index);
         // console.log(track);
@@ -104,22 +106,23 @@ function Library(props) {
     function renderLibrary(hoveredRowIndex){
         return (
             <Container className="libraryContainer justify-content-center">
+                {/* <div className="libraryInnerWrapper"> */}                
                 <Row className="rowContent headerRow flex-nowrap">
-                    <Col md="auto" className="rowContent">
+                    <Col md="auto" sm="2" className="rowContent indexColHeader ">
                         <div className="genericTextContent secondaryText rowContent headerIndex" style={{width:"2rem", textAlign:"right"}}>
                             #
                         </div>
                     </Col>
-                    <Col md="4" className="rowContent genericTextContent secondaryText">
+                    <Col md="4" xs="auto" sm="5" className="rowContent genericTextContent secondaryText titleColHeader">
                         TITLE
                     </Col>
-                    <Col md="3" className="rowContent genericTextContent secondaryText">
+                    <Col md="3" className="rowContent genericTextContent secondaryText d-none d-md-block">
                         ALBUM
                     </Col>
-                    <Col md="2" className="rowContent genericTextContent secondaryText">
+                    <Col md="2" sm="5" className="rowContent genericTextContent secondaryText notesRow d-none d-sm-block">
                         NOTES (HOVERABLE)
                     </Col>
-                    <Col md="auto" className="rowContent genericTextContent secondaryText">
+                    <Col md="auto" className="rowContent genericTextContent secondaryText resizableCol d-none d-md-block">
                         TAGS (HOVERABLE)
                     </Col>
 
@@ -130,30 +133,31 @@ function Library(props) {
                     <Col className="align-self-center" style={{border:"1px solid white", marginRight:"-2rem", marginLeft:"-2rem"}}>
                     </Col>
                 </Row> */}
-
+                
                 <div className="d-flex justify-content-center headerSeparator" style={{width:"100%"}}>
-                    <div style={{borderTop:"1px solid #acacac", width:"100%"}}></div>
+                    <div style={{borderTop:"0.0625rem solid #acacac", width:"100%"}}></div>
                 </div>
 
                 
                 {props.library.map((record, index) => {
                     var test = 1;
                     return (
-                        <Row id={'row-' + index} className={`rowContent flex-nowrap ${index == hoveredRowIndex ? "hovered" : ""}`} style={{marginTop:"0.75rem", marginBottom:"0.75rem"}}
+                        <Row id={'row-' + index} className={`rowContent flex-nowrap ${index == hoveredRowIndex ? "hovered" : ""} ${index == props.selectedRow ? "selectedRow hovered" : ""}`} style={{marginTop:"0.75rem", marginBottom:"0.75rem"}}
                         onMouseEnter={e => props.handleOnMouseEnter(e, index)}
                         onMouseLeave={e => props.handleOnMouseLeave(e, index)}
+                        onClick={e => props.handleSelectRow(e, index)}
                         // onMouseOver={e => props.handleMouseOver(e, index)}                        
                         >
-                            <Col md="auto" className="d-flex rowContent indexCol libraryCol align-items-center">
-                                <div className="d-flex align-items-end justify-content-end rowContent typeNumber indexRow" id={`index-${index}`} style={{width:"2rem", textAlign:"right"}}>
+                            <Col md="auto" sm="2" className="d-flex rowContent indexCol libraryCol align-items-center">
+                                <div className="d-flex align-items-end justify-content-end rowContent typeNumber indexRow " id={`index-${index}`} style={{width:"2rem", textAlign:"right"}}>
                                     {handleIndexColumn(record.trackUri, index)} 
                                 </div>
                                 
                             </Col>
                             
-                            <Col md="4" className="rowContent d-flex align-items-center">
+                            <Col md="4" xs="auto" sm="5" className="rowContent d-flex align-items-center titleCol">
                                 <div className="rowContent titleColLeft">
-                                    <img src={handleImageSelection(record.trackInfo.album.images)} style={{height:"40px", width:"40px"}}/>
+                                    <img src={handleImageSelection(record.trackInfo.album.images)} style={{height:"2.5rem", width:"2.5rem"}}/>
                                 </div>
 
                                 <div className="rowContent titleColRight">
@@ -183,12 +187,12 @@ function Library(props) {
                                     {handleArtists(record.trackInfo.artists)}
                                 </div>                            
                             </Col> */}
-                            <Col md="3" className="rowContent d-flex align-items-center">
+                            <Col md="3" className="rowContent d-flex align-items-center d-none d-md-block">
                                 <div className="secondaryText genericTextContent rowContent">
                                     {record.trackInfo.album.name}
                                 </div>
                             </Col>
-                            <Col md="2" className="rowContent d-flex align-items-center">
+                            <Col md="2" sm="5" className="notesRow rowContent d-flex align-items-center d-none d-sm-block">
                             {/* only add tooltip if there is overflow. Implementation is rudimentary until better workaround can be found */}
                             {record.notes.length > 37
                             ? (
@@ -210,7 +214,7 @@ function Library(props) {
                             )}                                                  
                                                         
                             </Col>
-                            <Col className="rowContent d-flex align-items-center" id="tagTrayCol" style={{overflowX:"auto"}}>
+                            <Col className="rowContent d-flex align-items-center d-none d-md-block" id="tagTrayCol" style={{overflowX:"auto"}}>
                                 {/* <div className="rowContent"> */}
                                 <OverlayTrigger                                    
                                     key={index}
@@ -258,15 +262,19 @@ function Library(props) {
                     )
                 })}
                 {/* <TrackEqualizer /> */}
-                
+            
+                {/* </div> */}
+                    
             </Container>    
         )
     }
 
     
-    function handleImageSelection(images){        
+    function handleImageSelection(images){    
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)    
         if(images.length != 0 && images.at(-1).width == 64 && images.at(-1).height == 64){
-            return images.at(-1).url;
+            if(vw > 1200){}
+            return images.at(0).url;
         }
         else{
             return stockImage64x64;
