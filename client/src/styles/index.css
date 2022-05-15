@@ -8,12 +8,8 @@
     }    
 }
 
-html, body {
-    height: 100%;
-}
-
-#root {
-    height:100%;
+html {
+    height: -webkit-fill-available;
 }
 
 body {
