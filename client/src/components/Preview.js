@@ -58,6 +58,8 @@ function Preview() {
 
   useEffect(() => {
     visualizer()
+    window.addEventListener('resize', onResize.bind(this))
+    onResize()
     Swal.fire({
       html: `<div class="sweetAlertItems">
       <p class="sweetAlertItems">Welcome to Passage.</p>     
@@ -547,6 +549,11 @@ function Preview() {
     // else if(!isPlayingTrackInLibrary && !isTrackRowHovered){
     //   return "number";
     // }
+  }
+
+  function onResize(){
+    const dashboard = document.getElementById("dashboard")
+    dashboard.style.height = window.innerHeight
   }
 
   function indexOfPlayingTrackInLibrary(track){    
