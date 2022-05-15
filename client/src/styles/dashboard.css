@@ -7,7 +7,7 @@
     position: relative; 
     /* background: linear-gradient(to bottom, #423081, #121212 200px);   */
     /* background: linear-gradient(to bottom, #423081, #121212fb 200px);   */
-    background: linear-gradient(to bottom, #423081, #121212c0 200px);  
+    background: linear-gradient(to bottom, #423081, #121212c0 12.5rem);  
 }
 
 @media (min-width: 1200px) {
@@ -55,12 +55,12 @@
 }
 
 #dashboardVisualizer{
-    opacity: 0.05;
+    opacity: 0.1;
 }
 
 @media (max-width: 1200px) {
     #dashboardVisualizer{
-        opacity: 0.3;
+        opacity: 0.6;
     }
 }
 
@@ -69,7 +69,7 @@
     color: #b2b2b2;
     fill: #b2b2b2;
     border-color: #b2b2b2;
-    margin-left: 12px;
+    /* margin-left: 12px; */
     /* margin-bottom: ; */
     border-width: 0.0625rem;
 }
@@ -77,4 +77,11 @@
 .dashboardBackButton:hover{
     background:transparent;
     border-color: white;
+}
+
+.sweetAlertItems{
+    background: transparent;
+    justify-content: left;
+    text-align: left;
+    color:white;
 }

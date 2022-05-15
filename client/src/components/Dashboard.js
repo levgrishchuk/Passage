@@ -1,6 +1,6 @@
 import useAuth from "./useAuth";
 import visualizer from "./Visualizer";
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import '../styles/dashboard.css'
 import Player from './Player';
 import SpotifyWebApi from "spotify-web-api-node";
@@ -61,8 +61,15 @@ function Dashboard({ code }) {
     <canvas id="dashboardVisualizer" class="webgl"></canvas>  
     <Container id='dashboard'>
           <div id='top' className='py-2'>
+            <Container>
+              <Row>
+                <Col>
+                  <a href="/" class="dashboardBackButton btn btn-outline-secondary btn-info" role="button">Homepage</a>
+                </Col>
+              </Row>
+            </Container>
           {/* {libraryState.hoveredRow} */}
-          <a href="/" class="dashboardBackButton btn btn-outline-secondary btn-info" role="button">Homepage</a>
+          
           </div>            
           <div id='library' className='my-2'><Library 
           library={library}
