@@ -32,15 +32,17 @@
   text-align: left;
 }
 
-.hovered .secondaryText{
+.hovered .secondaryText, .selectedRow .secondaryText{
   color: #f9f9f9;
   /* color:yellow; */
 }
 
-.hovered .tagDisplay{
+.hovered .tagDisplay, .selectedRow .tagDisplay{
   border-color: #f9f9f9;
   /* border-color: red; */
 }
+
+
 
 .imageCol{
   margin-left:-0.2rem;
