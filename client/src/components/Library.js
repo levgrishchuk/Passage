@@ -194,7 +194,7 @@ function Library(props) {
                             </Col>
                             <Col md="2" sm="5" className="notesRow rowContent d-flex align-items-center d-none d-sm-block">
                             {/* only add tooltip if there is overflow. Implementation is rudimentary until better workaround can be found */}
-                            {record.notes.length > 37
+                            {record.notes !=null && record.notes.length > 37
                             ? (
                                 <OverlayTrigger  
                                     onMouseLeave={e => handleMouseLeave(e, index)}                                  

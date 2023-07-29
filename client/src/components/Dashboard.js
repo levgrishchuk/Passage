@@ -96,8 +96,8 @@ function Dashboard({ code }) {
           handleOnMouseLeave={handleOnMouseLeave}
           handleMouseOver={handleMouseOver}
           handleIndexType={handleIndexType}
-          currentTrack={data ? data.body.item.uri : null}
-          isPlaying={data ? data.body.is_playing : null}
+          currentTrack={data?.body?.item?.uri || null}
+          isPlaying={data?.body?.is_playing || null}
           activeRow={activeRow} 
           selectedRow={selectedRow}
           handleSelectRow={handleSelectRow} /></div>
@@ -225,9 +225,7 @@ function Dashboard({ code }) {
 
   useEffect(() => {    
     console.log("data updated!");
-    if(data !== undefined && data.body != null) {
-
-      
+    if(data !== undefined && data.body != null && data.body.item != null) {
 
 
       // if no previous tracks, update handles to be in spots 1/5 and 2/5
@@ -365,6 +363,7 @@ function Dashboard({ code }) {
 
   function handleTrackChange(e, direction){
     var current_index = activeRow;
+    clearTimeout(trackLoopTimer.current);
     // determine if this is a call for next or prev track
     if(direction === "next"){
       // increment index of active row, call trackClick for new index and wrap around library size if need be      
@@ -411,7 +410,7 @@ function Dashboard({ code }) {
   function startTrackSegmentLoop(e, index, action, duration) {
     trackLoopTimer.current = setTimeout(() => {
       if(trackLoopRef.current == true){
-        handleTrackClick(e, index, action);
+        handleTrackClick(index, action);
       }
       else{
         clearTimeout(trackLoopTimer.current)
@@ -493,6 +492,7 @@ function Dashboard({ code }) {
   
   function handleTrackClick(index, action, e=null){
     indexOfSelectedTrack.current = index;
+    clearTimeout(trackLoopTimer.current);
     // var elementClassList = document.getElementById(`index-${index}`).classList;
     console.log("track clicked");
 
@@ -521,7 +521,7 @@ function Dashboard({ code }) {
       spotifyApi.play({
         context_uri: library[index].trackInfo.album.uri,
         offset: {
-          position: library[index].trackInfo.track_number - 1
+          uri: library[index].trackInfo.uri
         },
         position_ms: library[index].start
       }).then(() => {      
@@ -669,7 +669,10 @@ function Dashboard({ code }) {
 
   function handleEdit(e){
     // console.log(library)
-    if(selectedRow == -1) alert("Select a segment to edit")
+    if(selectedRow == -1){
+      alert("Select a segment to edit") 
+      return;
+    }
     console.log(!notes, tagsTray.length == 0)
     var request = {
         _id: library[selectedRow]._id,
@@ -797,13 +800,15 @@ function Dashboard({ code }) {
   // // }
   
   function handleTogglePlayback(e=null){
+    clearTimeout(trackLoopTimer.current);
     spotifyApi.getMyCurrentPlaybackState().then(data => {
       console.log(data);
       if(data.body !== null){
         var tempData = data;
         if(data.body.is_playing){
+          
           spotifyApi.pause().then((res) => {
-            clearTimeout(trackLoopTimer.current);
+            
             console.log("Paused");
             tempData.body.is_playing = !tempData.body.is_playing;
             set_data(tempData);  
