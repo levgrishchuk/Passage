@@ -10,7 +10,7 @@ import { ReactComponent as DeleteIconButton } from "../assets/playerDelete.svg";
 import { ReactComponent as EditIconButton } from "../assets/playerEdit.svg";
 import { ReactComponent as LoopIconButton } from "../assets/playerLoop.svg";
 import { ReactComponent as SaveIconButton } from "../assets/playerSave.svg";
-import { timestampFormat } from 'concurrently/src/defaults';
+// import { timestampFormat } from 'concurrently/src/defaults';
 // import { ReactComponent as SaveButton } from "../assets/playerSave.svg";
 
 function Player(props) {    
