@@ -52,7 +52,7 @@ Follow [MongoDB's official guide](https://docs.mongodb.com/manual/installation/)
     REACT_APP_redirect_uri = "http://localhost:3000/"
     mongoURI = "<your-mongoURI>"
     ```
-Please replace `<your-client-id>`, `<your-client-secret>`, and `<your-mongoURI>` with the values you obtained in Steps 2 and 3. Remember to include quotation marks ("") around your values.
+Replace `<your-client-id>`, `<your-client-secret>`, and `<your-mongoURI>` with the values you obtained in Steps 2 and 3. Remember to include quotation marks ("") around your values.
 
 For the `<your-mongoURI>`, remember to replace PASSWORD with your MongoDB user password. Special characters like %, @, and others should be URL-encoded.
 
