@@ -6,7 +6,7 @@ Passage is a web platform that elevates the music listening experience for casua
 
 Built using [MongoDB](link), [Express](link), [React](link), [Node.js](link), [Three.js](link), and the [Spotify API](link).
 
-Try it out at [site!](link)
+#### Try it out at [site!](link)
 
 ![Passage Screenshot](link to image file)
 
@@ -16,12 +16,13 @@ Try it out at [site!](link)
 - Feature 3
 
 ## Getting Started
-1. Log in with Spotify.
-2. Play a song on your Spotify client.
-3. Switch to Passage to gain control of the Spotify playback.
-4. Use the two-thumb seek bar to select a segment of the song.
-5. Add a note and tags to the selected passage.
-6. Save the passage—it will now appear in your Passage library.
+1. Visit [site!](link).
+2. Login with Spotify.
+3. Play a song on your Spotify client.
+4. Switch to Passage to gain control of the Spotify playback.
+5. Use the two-thumb seek bar to select a segment of the song.
+6. Add a note and tags to the selected passage.
+7. Save the passage—it will now appear in your Passage library.
 
 ## Demo Video
 Check out this [YouTube video](link) for a demo of Passage.
