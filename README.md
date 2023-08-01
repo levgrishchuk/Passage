@@ -16,6 +16,13 @@ Built using [MongoDB](link), [Express](link), [React](link), [Node.js](link), [T
 - Feature 3
 
 ## Getting Started
+
+To get the most out of Passage, you'll need a Spotify Premium account. This allows Passage to control Spotify playback and access your Spotify library.
+
+However, if you don't have a Spotify Premium account, you can still explore the interface with the "Preview" feature. This will allow you to navigate the Passage interface and browse through a few preloaded passages. Please note that actual playback will not be available in this mode.
+
+For the full functionality:
+
 1. Visit [site!](link).
 2. Login with Spotify.
 3. Play a song on your Spotify client.
