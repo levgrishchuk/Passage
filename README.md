@@ -11,8 +11,8 @@ Follow these steps to get the project up and running on your local machine.
 
 Ensure the following software is installed on your machine:
 
-- Node.js and npm: [Download Link](https://nodejs.org/en/download/)
-- Git: [Download Link](https://git-scm.com/downloads)
+- [Node.js and npm](https://nodejs.org/en/download/)
+- [Git](https://git-scm.com/downloads)
 
 ### Setup
 
