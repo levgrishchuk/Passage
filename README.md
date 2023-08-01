@@ -1,7 +1,30 @@
 # Passage
-> A ***** made with ***** [Vue](https://github.com/vuejs/vue), [D3](https://github.com/d3/d3), and [Three.js](https://github.com/mrdoob/three.js/).
 
-#### Try it out at *****[www.kaleidosync.com](https://www.kaleidosync.com)!
+> Your personal audio scrapbook.
+
+Passage is a web platform that elevates the music listening experience for casual listeners and aspiring music producers alike. Think of Passage as your personal audio scrapbook—it's your highlighter, note taker, and clipper for your musical exploration. As you journey through your Spotify library, you can select and preserve standout passages of songs, creating a curated collection of unique sounds and moments.
+
+Built using [MongoDB](link), [Express](link), [React](link), [Node.js](link), [Three.js](link), and integrates with the [Spotify API](link) for seamless interaction with your Spotify library.
+
+**Live Site:** [Try it out!](link)
+
+![Passage Screenshot](link to image file)
+
+## Features
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Getting Started
+1. Log in with Spotify.
+2. Play a song on your Spotify client.
+3. Switch to Passage to gain control of the Spotify playback.
+4. Use the two-thumb seek bar to select a segment of the song.
+5. Add a note and tags to the selected passage.
+6. Save the passage—it will now appear in your Passage library.
+
+## Demo Video
+Check out this [YouTube video](link) for a demo of Passage.
 
 ## Installation
 
