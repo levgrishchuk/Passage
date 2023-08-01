@@ -21,7 +21,7 @@ Ensure the following software is installed on your machine:
 In a directory of your choice, clone the repository using the following command:
 
 ```shell
-git clone <repository-url>
+git clone <https://github.com/moonwane/Passage.git>
 ```
 
 #### Step 2: Create Spotify Developer App
