@@ -150,7 +150,7 @@ function Dashboard({ code }) {
           return record.trackUri.replace("spotify:track:", "");
         });
         // console.log(arrayOfTrackIds);
-
+        // console.log(`LENGTH: ${arrayOfTrackIds.length}`)
         // query all track id's for info
         spotifyApi.getTracks(arrayOfTrackIds).then(tracksRes => {
           // to avoid an index out of bounds error
@@ -177,8 +177,9 @@ function Dashboard({ code }) {
           // updateCurrentUserState();
           })
           
-          .catch(() => {            
-            alert("error with retrieving library");
+          .catch((error) => {            
+            alert("Error with retrieving library. You've likely saved more than 50 passages. Will be fixed in the next version.");
+            console.error(error);
             // for debugging
             spotifyApi.getMyCurrentPlaybackState().then(data => {
               console.log(data);
