@@ -3,6 +3,10 @@
 
 #### Try it out at *****[www.kaleidosync.com](https://www.kaleidosync.com)!
 
+## Installation
+
+Follow these steps to get the project up and running on your local machine.
+
 ### Prerequisites
 
 Ensure the following software is installed on your machine:
