@@ -27,7 +27,7 @@ git clone https://github.com/levgrishchuk/Passage.git
 #### Step 2: Create Spotify Developer App
 
 1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications) and log in.
-2. Click on "Create an App", fill out the necessary information, and get your `client id` and `secret client`.
+2. Click on "Create an App", fill out the necessary information, and get your `client id` and `client secret`.
 3. Add `http://localhost:3000/` (make sure to include the trailing "/") as a Redirect URI in the app settings.
 
 #### Step 3: Setup MongoDB
