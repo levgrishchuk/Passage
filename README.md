@@ -2,7 +2,7 @@
 
 > Your personal audio scrapbook.
 
-Passage is a web platform that elevates the music listening experience for casual listeners and aspiring music producers alike. Think of Passage as your personal audio scrapbook. As you journey through your Spotify library, you can select and preserve standout passages of songs, creating a curated collection of unique sounds and moments. It's a tool for not just listening, but actively engaging with and studying music. It's your highlighter, note taker, and clipper for your musical exploration.
+Passage is a web platform that elevates the music listening experience for casual listeners and aspiring music producers alike. Think of Passage as your personal audio scrapbook. As you journey through your Spotify library, you can select and preserve standout passages of songs, creating a curated collection of unique sounds and moments. It's a tool for not just listening, but actively engaging with and studying music. It's your highlighter, note taker, and clipper for your listening experience.
 
 Built using [MongoDB](link), [Express](link), [React](link), [Node.js](link), [Three.js](link), and the [Spotify API](link).
 
@@ -11,20 +11,24 @@ Built using [MongoDB](link), [Express](link), [React](link), [Node.js](link), [T
 ![Passage Screenshot](link to image file)
 
 ## Features
-- Feature 1
-- Feature 2
-- Feature 3
+- **Clip and Annotate Passages:** Save favorite music segments using a dual-thumb seek bar, and annotate with personal notes and tags.
+- **Spotify Integration:** Control playback of your Spotify client with Passage's mirrored controls. Kept in sync through continuous polling.
+- **Spotify-Inspired Design:** Features a familiar UI, including an equalizer animation during track playback.
+- **Responsive Design:** Optimized for all screen sizes, from small devices to 4K+ resolutions.
+- **CRUD Functionality:** Easily create, read, update, and delete passages.
+- **Immersive Animation:** Visually engaging backdrop animation created with Three.js.
+- **Preview Page:** Explore the user interface without Spotify functionality.
 
 ## Getting Started
 
-To get the most out of Passage, you'll need a Spotify Premium account. This allows Passage to control Spotify playback and access your Spotify library.
+To get the most out of Passage, you'll need a **Spotify Premium account**. This allows Passage to control Spotify playback and access your Spotify library.
 
-However, if you don't have a Spotify Premium account, you can still explore the interface with the "Preview" feature. This will allow you to navigate the Passage interface and browse through a few preloaded passages. Please note that actual playback will not be available in this mode.
+However, if you don't have a **Spotify Premium account**, you can still explore the interface with the "Preview" feature. This will allow you to navigate the Passage interface and browse through a few preloaded passages. Please note that actual playback will not be available in this mode.
 
 For the full functionality:
 
 1. Visit [site!](link).
-2. Login with Spotify.
+2. Login with a **Spotify Premium account**.
 3. Play a song on your Spotify client.
 4. Switch to Passage to gain control of the Spotify playback.
 5. Use the two-thumb seek bar to select a segment of the song.
