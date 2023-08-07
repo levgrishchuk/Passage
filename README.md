@@ -12,7 +12,7 @@ Built using [MongoDB](link), [Express](link), [React](link), [Node.js](link), [T
 
 ## Features
 - **Clip and Annotate Passages:** Save favorite music segments using a dual-thumb seek bar, and annotate with personal notes and tags.
-- **Spotify Integration:** Control playback of your Spotify client with Passage's mirrored controls. Kept in sync through continuous polling.
+- **Spotify Integration:** Control playback of your Spotify client with Passage's mirrored controls. Stays synchronized through continuous polling.
 - **Spotify-Inspired Design:** Features a familiar UI, including an equalizer animation during track playback.
 - **Responsive Design:** Optimized for all screen sizes, from small devices to 4K+ resolutions.
 - **CRUD Functionality:** Easily create, read, update, and delete passages.
