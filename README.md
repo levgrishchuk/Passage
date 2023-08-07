@@ -4,7 +4,7 @@
 
 Passage is a web platform that elevates the music listening experience for casual listeners and aspiring music producers alike. Think of Passage as your personal audio scrapbook. As you journey through your Spotify library, you can select and preserve standout passages of songs, creating a curated collection of unique sounds and moments. It's a tool for not just listening, but actively engaging with and studying music. It's your highlighter, note taker, and clipper for your musical journey.
 
-Built using [MongoDB](link), [Express](link), [React](link), [Node.js](link), [Three.js](link), and the [Spotify API](link).
+Built using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com/), [React](https://reactjs.org/), [Node.js](https://nodejs.org/), [Three.js](https://threejs.org/), and the [Spotify API](https://developer.spotify.com/documentation/web-api/).
 
 #### Try it out at [site!](link)
 
