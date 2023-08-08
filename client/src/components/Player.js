@@ -27,7 +27,7 @@ function Player(props) {
         const zeroPad = (num, places) => String(num).padStart(places, '0')
       
         return "%minutes:%seconds"
-          .replace('%minutes', zeroPad(date.getMinutes(), 2))
+          .replace('%minutes', date.getMinutes())
           .replace('%seconds', zeroPad(date.getSeconds(), 2));
     }
 
@@ -69,11 +69,17 @@ function Player(props) {
                 </Col>
                               
             </Row>
-            <Row className="playerItems m-2">
-                <Range className='playerItems' defaultValue={[props.sliderHandles[0], props.sliderHandles[1]]} 
-                    max={props.trackDuration}
-                    onChange={props.handleSliderChange}
-                    tipFormatter={value => secondsToTime(value)}/>                 
+            <Row id='rangeRow' className="playerItems m-2">
+                <span id='timeLabelLeft' className="genericTextContent secondaryText">0:00</span>
+
+                <div className="playerItems rangeContainer">
+                    <Range className='playerItems' defaultValue={[props.sliderHandles[0], props.sliderHandles[1]]} 
+                        max={props.trackDuration}
+                        onChange={props.handleSliderChange}
+                        tipFormatter={value => secondsToTime(value)}/>
+                </div>                
+                
+                <span id='timeLabelRight' className="genericTextContent secondaryText">{secondsToTime(props.trackDuration)}</span>                 
             </Row>   
                              
         </Container>

@@ -63,6 +63,44 @@ button {
     /* font-weight: 600; */
 }
 
+#timeLabelLeft{
+  /* color: #acacac; */
+  /* font-size: 0.90rem; */
+  width: min-content;
+  text-align: center;
+  background: transparent;
+  margin-bottom: 0.20rem;
+  padding-left:0;
+  padding-right: 0;
+}
+
+#timeLabelRight{
+  /* color: #acacac; */
+  /* font-size: 0.90rem; */
+  width: min-content;
+  text-align: center;
+  background: transparent;
+  margin-bottom: 0.20rem;
+  padding-left:0;
+  padding-right:0;
+}
+
+#rangeRow{
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the items horizontally */
+  /* width: 100%; */
+}
+
+/* .rc-slider{
+  width:auto;
+} */
+
+.rangeContainer {
+  flex-grow: 1; 
+  width:auto;
+}
+
 
 @media (max-width:768px) {
     #playerSaveButton, #playerLoopButton {
@@ -457,5 +495,7 @@ button {
     border-width: 4px 4px 0;
     border-top-color: #6c6c6c;
   }
+
+
   
 

@@ -535,7 +535,7 @@ function Dashboard({ code }) {
         clearDataTimers();        
         updateCurrentUserState(500, index);              
       },        
-      error => alert("No active device found"))
+      error => alert("Please try again. Ensure you have a Spotify Premium account, or if your Spotify client has been inactive, play something new on it to wake it up."))
       }
     else if(action === "pause"){
       set_active_row(-1);  
