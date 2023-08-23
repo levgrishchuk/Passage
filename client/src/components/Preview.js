@@ -179,7 +179,7 @@ function Preview() {
         }
       }).then(res => {
         console.log('library: \n');
-        console.log(res.data);
+        console.log(res.data);        
         
         // make array of track id's
         var arrayOfTrackIds = res.data.map(record => {
@@ -543,6 +543,7 @@ function Preview() {
   
   function handleTrackClick(index, action, e){
     // var elementClassList = document.getElementById(`index-${index}`).classList;
+    // clearTimeout(trackLoopTimer.current);
     console.log("track clicked");
 
     if(action === "play"){
@@ -708,34 +709,86 @@ function Preview() {
   }
 
   function handleSave(e){
-    // let values = previousValues.current;
-    // if(data !== undefined && data.body !== null && user.current && previousValues.current && trackUri){
-    //   axios.post('/api/items', {
-    //     user: user.current,
-    //     start: previousValues.current[0],
-    //     finish: previousValues.current[1],
-    //     trackUri: trackUri,        
-    //     notes: notes,
-    //     tags: tagsTray
-    //     }).then(res => {
-    //       console.log(res);
-    //       clearDashboard();          
-    //     })
-    //     .catch(() => {            
-    //         alert("error with saving (server error)");
-    //     })
-    // }
-    // else{
-    //   alert("error with saving (client error)");
-    // }
+    if(!data.body.is_playing){
+      alert("Select a track from the Passage library to 'save.' Before saving, consider adjusting the seek bar, notes, and tags to personalize the new entry.")
+      return;
+    }
+    let values = previousValues.current;
+    var temp = [...library];
+    const uriToFind = data.body.item.uri;
+    var foundIndex = library.findIndex(element => element.trackUri === uriToFind);
+
+    if(foundIndex !== -1){
+      // deep copy
+      const clonedRecord = JSON.parse(JSON.stringify(library[foundIndex]));
+
+      // update information
+      clonedRecord.start = previousValues.current[0];
+      clonedRecord.finish = previousValues.current[1];
+      clonedRecord.notes = notes;
+      clonedRecord.tags = tagsTray;
+
+      // insert at front of array
+      temp.unshift(clonedRecord);
+
+      // update library and reset notes and tagsTray
+      set_library(temp);
+      librarySize.current += 1;
+      clearDashboard();
+
+    }
+    else{
+      alert("error with saving (client error)");
+    }
   }
 
   function handleEdit(e){
-    return
+    if(selectedRow == -1){
+      alert("Select something from the Passage library to edit") 
+      return;
+    }
+    if(!data.body.is_playing){
+      alert("Please press the play icon for the selected track in the Passage library before making any edits")
+      return;
+    }
+    if(library){
+      var temp = [...library];
+      console.log(`notes: ${notes}, ${tagsTray}`)
+      temp[selectedRow].start = previousValues.current[0];
+      temp[selectedRow].finish = previousValues.current[1];      
+      if(tagsTray && tagsTray.length !== 0){
+        temp[selectedRow].tags = tagsTray;
+      }
+      if(notes){
+        temp[selectedRow].notes = notes;
+      }
+      
+      set_library(temp);
+      clearDashboard();
+    }
+    else{
+      alert("error with editing (client error)");
+    }
+
   }
 
   function handleDelete(e){
-    return
+    if(selectedRow == -1){
+      alert("Select something from the Passage library to edit");
+      return;
+    } 
+
+    if(library){
+      var temp = [...library];
+      
+      temp.splice(selectedRow, 1);      
+      set_library(temp);
+      set_selected_row(-1);
+      clearDashboard();
+    }
+    else{
+      alert("error with deleting (client error)");
+    }
   }
 
   function handleTagDelete(e, value){

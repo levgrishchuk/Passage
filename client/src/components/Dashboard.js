@@ -671,7 +671,7 @@ function Dashboard({ code }) {
   function handleEdit(e){
     // console.log(library)
     if(selectedRow == -1){
-      alert("Select a segment to edit") 
+      alert("Select something from the Passage library to edit") 
       return;
     }
     console.log(!notes, tagsTray.length == 0)
@@ -697,33 +697,38 @@ function Dashboard({ code }) {
         })
         .catch((e) => {   
             console.log(e)         
-            alert("error with saving (server error)");
+            alert("error with editing (server error)");
         })
     }
     else{
-      alert("error with saving (client error)");
+      alert("error with editing (client error)");
     }
   }
 
   function handleDelete(e){
-    if(selectedRow == -1) alert("Select a segment to delete")
+    if(selectedRow == -1){
+      alert("Select something from the Passage library to edit");
+      return;
+    }
+     
     if(library){      
       axios.delete(`/api/items/${library[selectedRow]._id}`).then(res => {
           console.log(res);
           spotifyApi.getMe().then(data => {
             user.current = data.body.display_name;
             fetchLibrary(data, ["50b3753a7ed653a553c26c8585fc5818(preview)", data.body.display_name])
+            set_selected_row(-1);
             // fetchLibrary(data, data.body.display_name)      
           })
           clearDashboard();          
         })
         .catch((e) => {   
             console.log(e)         
-            alert("error with saving (server error)");
+            alert("error with deleting (server error)");
         })
     }
     else{
-      alert("error with saving (client error)");
+      alert("error with deleting (client error)");
     }
   }
 
