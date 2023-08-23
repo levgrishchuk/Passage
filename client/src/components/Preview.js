@@ -748,7 +748,7 @@ function Preview() {
       return;
     }
     if(!data.body.is_playing){
-      alert("Please press the play icon for the selected track in the Passage library before making any edits")
+      alert("Before making any edits, click the play icon located to the left of your selected track in the Passage library.")
       return;
     }
     if(library){

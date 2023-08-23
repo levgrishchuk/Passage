@@ -711,8 +711,12 @@ function Dashboard({ code }) {
       return;
     }
      
-    if(library){      
-      axios.delete(`/api/items/${library[selectedRow]._id}`).then(res => {
+    if(library){ 
+      if(library[selectedRow].user === "50b3753a7ed653a553c26c8585fc5818(preview)"){        
+        alert("Previews cannot be deleted for now. On the TODO list");
+      }
+      else{
+        axios.delete(`/api/items/${library[selectedRow]._id}`).then(res => {
           console.log(res);
           spotifyApi.getMe().then(data => {
             user.current = data.body.display_name;
@@ -726,6 +730,7 @@ function Dashboard({ code }) {
             console.log(e)         
             alert("error with deleting (server error)");
         })
+      }      
     }
     else{
       alert("error with deleting (client error)");
