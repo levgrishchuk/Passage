@@ -26,7 +26,7 @@ function Login() {
                             </div>
                         </a>
                         <div className="loginButtonContainerItems d-flex justify-content-center">
-                            <span className="loginButtonSpan">features require a <span className='loginUnderlines'>PREMIUM SPOTIFY ACCOUNT</span></span>
+                            <span className="loginButtonSpan">playback requires a <span className='loginUnderlines'>PREMIUM SPOTIFY ACCOUNT</span></span>
                         </div> 
                     </div>
                     <div className='transparentContainer rightSection'>
@@ -36,7 +36,7 @@ function Login() {
                             </div>
                         </a>
                         <div className="loginButtonContainerItems d-flex justify-content-center">
-                            <span className="loginButtonSpan">Includes sample records and an interactive UI</span>
+                            <span className="loginButtonSpan">Explore the UI without Spotify functionality</span>
                         </div> 
                     </div>
                 </div>

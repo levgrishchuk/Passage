@@ -178,7 +178,7 @@ function Dashboard({ code }) {
           })
           
           .catch((error) => {            
-            alert("Error with retrieving library. You've likely saved more than 50 passages. Will be fixed in the next version.");
+            alert("Error with retrieving library. The Passage library has likely exceeded 50 passages, including existing previews. Will be fixed in the next version.");
             console.error(error);
             // for debugging
             spotifyApi.getMyCurrentPlaybackState().then(data => {

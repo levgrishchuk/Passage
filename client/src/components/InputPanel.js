@@ -41,7 +41,7 @@ function InputPanel(props) {
                 <Col className="inputPanelItems">  
                         <label className="inputPanelItems inputPanelLabels" for="customTagInputPanel">Custom Tag</label>     
                         <div className="inputPanelItems input-group mb-3">                             
-                            <input type="text" id="customTagInputPanel" className="form-control inputPanelInput" label="Test" placeholder="Create a custom tag" value={props.customTag} onChange={props.handleCustomTags}/>    
+                            <input type="text" id="customTagInputPanel" className="form-control inputPanelInput" label="Test" placeholder="Create a custom tag..." value={props.customTag} onChange={props.handleCustomTags}/>    
                             <button id="customSubmit" className="btn btn-outline-secondary inputPanelButton plusSignButton d-flex align-items-center" onClick={function(e){props.handleAddingCustomTag(e);handleButtonClicking(e)}} ><PlusSign/></button>
                         </div>                         
                             
