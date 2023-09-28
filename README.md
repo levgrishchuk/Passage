@@ -6,9 +6,14 @@ Envisioned as a productivity tool for musicians, Passage allows you to clip the 
 
 Built using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com/), [React](https://reactjs.org/), [Node.js](https://nodejs.org/), [Three.js](https://threejs.org/), and the [Spotify API](https://developer.spotify.com/documentation/web-api/).
 
-#### Try it out at [https://passage.onrender.com/](https://passage.onrender.com/)
+---
+
+#### **Try it out at [https://passage.onrender.com/](https://passage.onrender.com/)**
 
 [Screenshot TODO](link TODO)
+
+## Demo Video
+Check out this [YouTube video](link) for a demo of Passage.
 
 ## Features
 - **Clip and Annotate Passages:** Save favorite music segments using a dual-thumb seek bar, and annotate with personal notes and tags.
@@ -27,16 +32,13 @@ However, if you don't have a **Spotify Premium account**, you can still explore 
 
 For the full functionality:
 
-1. Visit [site!](link).
+1. Visit [https://passage.onrender.com/](https://passage.onrender.com/).
 2. Login with a **Spotify Premium account**.
 3. Play a song on your Spotify client.
 4. Switch to Passage to gain control of the Spotify playback.
 5. Use the two-thumb seek bar to select a segment of the song.
 6. Add a note and tags to the selected passage.
 7. Save the passage—it will now appear in your Passage library.
-
-## Demo Video
-Check out this [YouTube video](link) for a demo of Passage.
 
 ## Installation
 
