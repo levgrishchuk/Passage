@@ -6,7 +6,7 @@ Envisioned as a productivity tool for musicians, Passage allows you to clip the 
 
 Built using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com/), [React](https://reactjs.org/), [Node.js](https://nodejs.org/), [Three.js](https://threejs.org/), and the [Spotify API](https://developer.spotify.com/documentation/web-api/).
 
-#### Try it out at [[site!](link)](https://passage.onrender.com/)
+#### Try it out at [https://passage.onrender.com/!](https://passage.onrender.com/)
 
 [Screenshot TODO](link TODO)
 
