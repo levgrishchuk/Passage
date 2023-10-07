@@ -10,6 +10,12 @@ Built using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com
 
 #### **Try it out at [https://passage.onrender.com/](https://passage.onrender.com/)**
 
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/levgrishchuk/Passage/assets/68343698/49826df7-213c-4586-8295-b540fe5ad931" alt="First GIF"/>
+    <img src="https://github.com/levgrishchuk/Passage/assets/68343698/805baa18-020d-4877-ac1a-9156af57c10c" alt="Second GIF"/>
+</div>
+
+
 
 ![ezgif com-optimize](https://github.com/levgrishchuk/Passage/assets/68343698/49826df7-213c-4586-8295-b540fe5ad931)          ![passagetest14finalsmall3](https://github.com/levgrishchuk/Passage/assets/68343698/805baa18-020d-4877-ac1a-9156af57c10c)
 
