@@ -10,7 +10,7 @@ Built using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com
 
 #### **Try it out at [https://passage.onrender.com/](https://passage.onrender.com/)**
 
-![desktopView](https://github.com/levgrishchuk/Passage/assets/68343698/49826df7-213c-4586-8295-b540fe5ad931) ![spacer](https://github.com/levgrishchuk/Passage/assets/68343698/8a2d6053-3f20-4341-bbb8-ec82090ebfc8) ![mobileView](https://github.com/levgrishchuk/Passage/assets/68343698/805baa18-020d-4877-ac1a-9156af57c10c)
+![desktopView](https://github.com/levgrishchuk/Passage/assets/68343698/6b43ca47-7313-4372-9599-01d348d2e0ca) ![spacer](https://github.com/levgrishchuk/Passage/assets/68343698/8a2d6053-3f20-4341-bbb8-ec82090ebfc8) ![mobileView](https://github.com/levgrishchuk/Passage/assets/68343698/805baa18-020d-4877-ac1a-9156af57c10c)
 
 ## Demo Video
 Check out this [YouTube video](link) for a demo of Passage.
