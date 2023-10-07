@@ -11,6 +11,7 @@ Built using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com
 #### **Try it out at [https://passage.onrender.com/](https://passage.onrender.com/)**
 
 [Screenshot TODO](link TODO)
+![passagetest14finalsmall3](https://github.com/levgrishchuk/Passage/assets/68343698/805baa18-020d-4877-ac1a-9156af57c10c)
 
 ## Demo Video
 Check out this [YouTube video](link) for a demo of Passage.
