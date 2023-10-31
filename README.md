@@ -13,9 +13,9 @@ Built using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com
 ![desktopView](https://github.com/levgrishchuk/Passage/assets/68343698/6b43ca47-7313-4372-9599-01d348d2e0ca) ![spacer](https://github.com/levgrishchuk/Passage/assets/68343698/8a2d6053-3f20-4341-bbb8-ec82090ebfc8) ![mobileView](https://github.com/levgrishchuk/Passage/assets/68343698/805baa18-020d-4877-ac1a-9156af57c10c)
 
 ## Demo Video
-Click on this image to view the demo.
+Click [here](https://www.youtube.com/watch?v=Q4BFqM1crfA) to view the demo.
 
-[![Passage Demo](https://github.com/levgrishchuk/Passage/assets/68343698/3a572910-f493-4e2d-bf44-e8baea689a74)](https://www.youtube.com/watch?v=Q4BFqM1crfA)
+![Passage Demo](https://github.com/levgrishchuk/Passage/assets/68343698/3a572910-f493-4e2d-bf44-e8baea689a74)
 
 ## Features
 - **Clip and Annotate Passages:** Save favorite music segments using a dual-thumb seek bar, and annotate with personal notes and tags.
